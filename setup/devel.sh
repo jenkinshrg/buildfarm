@@ -9,8 +9,6 @@ sudo apt-get -y install python python-dev python-pip
 
 sudo apt-get -y install subversion
 
-sudo add-apt-repository -y ppa:git-core/ppa
-sudo apt-get update
 sudo apt-get -y install git
 
 sudo apt-get -y install sshpass
