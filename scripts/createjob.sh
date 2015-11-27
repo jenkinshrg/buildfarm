@@ -385,7 +385,7 @@ source .jenkins.sh</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>changes.txt,build.txt,googledrive.txt,testbed-terrain.txt,testbed-terrain.ogv,testbed-terrain.png</artifacts>
+      <artifacts>changes.txt,build.txt,googledrive.txt,jenkinshrg-*.txt,jenkinshrg-*.ogv,jenkinshrg-*.png</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -518,7 +518,7 @@ source .jenkins.sh</command>
           <stopProcessingIfError>true</stopProcessingIfError>
         </GoogleTestType>
         <JUnitType>
-          <pattern>**/testbed-terrain.xml</pattern>
+          <pattern>**/jenkinshrg-*.xml</pattern>
           <skipNoTestFiles>true</skipNoTestFiles>
           <failIfNotNew>false</failIfNotNew>
           <deleteOutputFiles>true</deleteOutputFiles>
@@ -619,7 +619,7 @@ source .jenkins.sh</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>changes.txt,build.txt,googledrive.txt,testbed-terrain.txt,testbed-terrain.ogv,testbed-terrain.png</artifacts>
+      <artifacts>changes.txt,build.txt,googledrive.txt,jenkinshrg-*.txt,jenkinshrg-*.ogv,jenkinshrg-*.png</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -752,7 +752,7 @@ source .jenkins.sh</command>
           <stopProcessingIfError>true</stopProcessingIfError>
         </GoogleTestType>
         <JUnitType>
-          <pattern>**/testbed-terrain.xml</pattern>
+          <pattern>**/jenkinshrg-*.xml</pattern>
           <skipNoTestFiles>true</skipNoTestFiles>
           <failIfNotNew>false</failIfNotNew>
           <deleteOutputFiles>true</deleteOutputFiles>
