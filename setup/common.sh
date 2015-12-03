@@ -19,3 +19,11 @@ sudo dpkg-reconfigure --frontend noninteractive tzdata
 sudo sed -i -e "s/pc105/jp106/g" /etc/default/keyboard
 sudo sed -i -e "s/us/jp/g" /etc/default/keyboard
 #source /etc/default/keyboard
+
+sudo apt-get -y install software-properties-common
+sudo apt-get -y install python-software-properties
+
+sudo apt-get -y install build-essential
+
+sudo apt-get -y install subversion
+sudo apt-get -y install git
