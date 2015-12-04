@@ -24,7 +24,6 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 slave-64", privileged: false
     # server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave-desktop", privileged: false
     # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-desktop https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 slave-desktop periodic", privileged: false
-    server.vm.provision "shell", path: "setup/report.sh", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
     server.vm.box = "boxcutter/ubuntu1404"
