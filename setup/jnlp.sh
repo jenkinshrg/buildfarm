@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME=${1}
+NAME=${1:-slave}
 URL=${2:-http://localhost:8080}
 
 wget -q ${URL}/jnlpJars/slave.jar
