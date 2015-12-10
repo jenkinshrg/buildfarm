@@ -16,6 +16,7 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--cpus", "1"]
     end
     server.vm.provision "shell", path: "setup/server.sh", privileged: false
+    server.vm.provision "shell", path: "setup/jenkins.py", privileged: false
     server.vm.provision "shell", path: "setup/misc.sh", privileged: false
     server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 slave", privileged: false

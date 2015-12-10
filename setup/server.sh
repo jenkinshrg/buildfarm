@@ -35,28 +35,3 @@ EOL
 
 sudo sh -c "echo '30 * * * * vagrant cd /home/vagrant && rm -fr jenkinshrg.github.io && git clone https://github.com/jenkinshrg/jenkinshrg.github.io.git && cd jenkinshrg.github.io && bash -xe .jenkins.sh' >> /etc/crontab"
 sudo service cron restart
-
-#sudo pip install python-jenkins
-
-sudo apt-get -y install phantomjs
-sudo pip install selenium
-
-cat << EOL | python
-import sys
-import os
-from selenium import webdriver
-
-driver = webdriver.PhantomJS(service_log_path=os.ttyname(sys.stdout.fileno()))
-driver.get("http://localhost:8080/configureSecurity/")
-driver.implicitly_wait(10)
-element = driver.find_element_by_id('cb14')
-element.click()
-element = driver.find_element_by_css_selector("input[type='radio'][value='fixed']")
-element.click()
-element = driver.find_element_by_id('slaveAgentPortId')
-element.clear()
-element.send_keys("9000")
-element = driver.find_element_by_id('yui-gen6-button')
-element.click()
-driver.quit()
-EOL

@@ -23,3 +23,8 @@ sudo apt-get -y install cppcheck
 #sudo apt-get -y install cccc
 
 sudo pip install google-api-python-client
+
+sudo apt-get -y install phantomjs
+sudo pip install selenium
+
+#sudo pip install python-jenkins
