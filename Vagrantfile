@@ -35,7 +35,7 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/devel.sh", privileged: false
     server.vm.provision "shell", path: "setup/jnlp.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
-  config.vm.define "slave-32", autostart: false do |server|
+  config.vm.define "debian-wheezy-64", autostart: false do |server|
     server.vm.box = "boxcutter/debian78-i386"
     server.vm.network "private_network", ip: "192.168.33.12", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/devel.sh", privileged: false
     server.vm.provision "shell", path: "setup/jnlp.sh", args: "slave-32 http://192.168.33.10:8080", privileged: false
   end
-  config.vm.define "slave-64", autostart: false do |server|
+  config.vm.define "ubuntu-trusty-64", autostart: false do |server|
     server.vm.box = "boxcutter/ubuntu1404"
     server.vm.network "private_network", ip: "192.168.33.13", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/devel.sh", privileged: false
     server.vm.provision "shell", path: "setup/jnlp.sh", args: "slave-64 http://192.168.33.10:8080", privileged: false
   end
-  # config.vm.define "slave-desktop", autostart: false do |server|
+  # config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
   #   server.vm.box = "boxcutter/ubuntu1404-desktop"
   #   server.vm.network "private_network", ip: "192.168.33.14", virtualbox__intnet: "intnet0"
   #   server.vm.provider "virtualbox" do |vb|
