@@ -43,6 +43,7 @@ sudo service cron restart
 #sudo pip install python-jenkins
 
 sudo apt-get -y install phantomjs
+sudo pip install selenium
 
 cat << EOL | python
 import sys

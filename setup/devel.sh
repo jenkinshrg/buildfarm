@@ -3,6 +3,8 @@
 sudo apt-get -y install sshpass
 ${HOME}/Documents/jenkinshrg/install/credential.sh
 
+sudo apt-get -y install build-essential
+
 sudo apt-get -y install python python-dev python-pip
 
 sudo apt-get -y install cmake

@@ -10,5 +10,3 @@ sudo apt-get -y install nvidia-current nvidia-settings
 #Change NVIDIA driver
 #Enable user auto login
 #Disable screen auto off and lock password
-
-sudo apt-get -y install vim
