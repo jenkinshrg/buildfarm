@@ -1,9 +1,12 @@
 #!/bin/bash
 
-sudo sed -i -e 's/\/\/jp.archive.ubuntu.com/\/\/ftp.jaist.ac.jp/g' /etc/apt/sources.list
-sudo sed -i -e 's/\/\/us.archive.ubuntu.com/\/\/ftp.jaist.ac.jp/g' /etc/apt/sources.list
-sudo sed -i -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp/g' /etc/apt/sources.list
-sudo sed -i -e 's/\/\/http.debian.net/\/\/ftp.jp.debian.org/g' /etc/apt/sources.list
+sudo sed -i -e 's/jp.archive.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list
+sudo sed -i -e 's/us.archive.ubuntu.com/archive.ubuntu.com/g' /etc/apt/sources.list
+
+sudo sed -i -e 's/archive.ubuntu.com/ftp.tsukuba.wide.ad.jp\/Linux/g' /etc/apt/sources.list
+sudo sed -i -e 's/security.ubuntu.com/ftp.tsukuba.wide.ad.jp\/Linux/g' /etc/apt/sources.list
+
+sudo sed -i -e 's/http.debian.net/ftp.jp.debian.org/g' /etc/apt/sources.list
 
 sudo apt-get update
 #sudo apt-get -y upgrade

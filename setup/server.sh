@@ -1,31 +1,60 @@
 #!/bin/bash
 
-sudo apt-add-repository -y ppa:nginx/stable
+wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
-sudo apt-get -y install nginx
+sudo apt-get -y install jenkins
 
-sudo rm /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-cat << \EOT | sudo tee /etc/nginx/sites-available/jenkins
-upstream app_server { 
-    server localhost:8080 fail_timeout=0; 
-} 
+sleep 30
+wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin multiple-scms
+#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin clone-workspace-scm
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin embeddable-build-status
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper 
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor 
+#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cmakebuilder
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin warnings
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cobertura
+#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cccc
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cppcheck
+#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin htmlpublisher
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin valgrind
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin xunit
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin email-ext
+rm jenkins-cli.jar
+sudo service jenkins restart
+sleep 30
 
-server { 
-    listen 80; 
-    listen [::]:80 default ipv6only=on; 
-    server_name jenkinshrg.a01.aist.go.jp; 
-
-    location / { 
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
-        proxy_set_header Host $http_host; 
-        proxy_redirect off; 
-
-        if (!-f $request_filename) { 
-            proxy_pass http://app_server; 
-            break; 
-        } 
-    } 
+cat << EOL | sudo tee -a /var/cache/jenkins/war/css/style.css
+pre {
+    background-color: #2a2a2a;
+    color: #f1f1f1;
 }
-EOT
-sudo ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/
-sudo service nginx restart
+EOL
+
+sudo sh -c "echo '30 * * * * vagrant cd /home/vagrant && rm -fr jenkinshrg.github.io && git clone https://github.com/jenkinshrg/jenkinshrg.github.io.git && cd jenkinshrg.github.io && bash -xe .jenkins.sh' >> /etc/crontab"
+sudo service cron restart
+
+#sudo pip install python-jenkins
+
+sudo apt-get -y install phantomjs
+sudo pip install selenium
+
+cat << EOL | python
+import sys
+import os
+from selenium import webdriver
+
+driver = webdriver.PhantomJS(service_log_path=os.ttyname(sys.stdout.fileno()))
+driver.get("http://localhost/configureSecurity/")
+driver.implicitly_wait(10)
+element = driver.find_element_by_id('cb14')
+element.click()
+element = driver.find_element_by_id('slaveAgentPortId')
+element.clear()
+element.send_keys("9000")
+element = driver.find_element_by_id('yui-gen6-button')
+element.click()
+driver.quit()
+EOL

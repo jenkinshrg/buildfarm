@@ -2,7 +2,7 @@
 
 sudo sh -c 'echo "tokunaga ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
-LANG=C xdg-user-dirs-gtk-update
+#LANG=C xdg-user-dirs-gtk-update
 
 sudo add-apt-repository -y ppa:xorg-edgers/ppa
 sudo apt-get update
