@@ -26,5 +26,3 @@ sudo apt-get -y install cppcheck
 #sudo apt-get -y install cccc
 
 sudo pip install google-api-python-client
-
-#sudo pip install python-jenkins
