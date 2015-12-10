@@ -47,7 +47,7 @@ import os
 from selenium import webdriver
 
 driver = webdriver.PhantomJS(service_log_path=os.ttyname(sys.stdout.fileno()))
-driver.get("http://localhost/configureSecurity/")
+driver.get("http://localhost:8080/configureSecurity/")
 driver.implicitly_wait(10)
 element = driver.find_element_by_id('cb14')
 element.click()
