@@ -58,15 +58,15 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/misc.sh", privileged: false
     server.vm.provision "shell", path: "setup/jnlp.sh", args: "ubuntu-trusty-amd64 http://192.168.33.10:8080", privileged: false
   end
-  # config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
-  #   server.vm.box = "boxcutter/ubuntu1404-desktop"
-  #   server.vm.network "private_network", ip: "192.168.33.14", virtualbox__intnet: "intnet0"
-  #   server.vm.provider "virtualbox" do |vb|
-  #     vb.customize ["modifyvm", :id, "--memory", "4096"]
-  #     vb.customize ["modifyvm", :id, "--cpus", "2"]
-  #     vb.customize ["modifyvm", :id, "--ioapic", "on"]
-  #   end
-  #   server.vm.provision "shell", path: "setup/misc.sh", privileged: false
-  #   server.vm.provision "shell", path: "setup/jnlp.sh", args: "ubuntu-trusty-amd64-desktop http://192.168.33.10:8080", privileged: false
-  # end
+  config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
+    server.vm.box = "boxcutter/ubuntu1404-desktop"
+    server.vm.network "private_network", ip: "192.168.33.14", virtualbox__intnet: "intnet0"
+    server.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
+    server.vm.provision "shell", path: "setup/misc.sh", privileged: false
+    server.vm.provision "shell", path: "setup/jnlp.sh", args: "ubuntu-trusty-amd64-desktop http://192.168.33.10:8080", privileged: false
+  end
 end
