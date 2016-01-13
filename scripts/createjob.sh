@@ -385,7 +385,7 @@ source .jenkins.sh</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>changes.txt,build.txt,googledrive.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv</artifacts>
+      <artifacts>changes.txt,build.txt,googledrive.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -518,7 +518,7 @@ source .jenkins.sh</command>
           <stopProcessingIfError>true</stopProcessingIfError>
         </GoogleTestType>
         <JUnitType>
-          <pattern>**/jenkinshrg.xml,**/testbed-terrain.xml,**/drc-valves.xml</pattern>
+          <pattern>**/jenkinshrg.xml,**/testbed-terrain.xml,**/drc-valves.xml,**/drc-wall-testbed.xml</pattern>
           <skipNoTestFiles>true</skipNoTestFiles>
           <failIfNotNew>false</failIfNotNew>
           <deleteOutputFiles>true</deleteOutputFiles>
@@ -619,7 +619,7 @@ source .jenkins.sh</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>changes.txt,build.txt,googledrive.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv</artifacts>
+      <artifacts>changes.txt,build.txt,googledrive.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -752,7 +752,7 @@ source .jenkins.sh</command>
           <stopProcessingIfError>true</stopProcessingIfError>
         </GoogleTestType>
         <JUnitType>
-          <pattern>**/jenkinshrg.xml,**/testbed-terrain.xml,**/drc-valves.xml</pattern>
+          <pattern>**/jenkinshrg.xml,**/testbed-terrain.xml,**/drc-valves.xml,**/drc-wall-testbed.xml</pattern>
           <skipNoTestFiles>true</skipNoTestFiles>
           <failIfNotNew>false</failIfNotNew>
           <deleteOutputFiles>true</deleteOutputFiles>
