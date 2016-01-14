@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/jnlp.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
-    server.vm.box = "boxcutter/debian78-i386"
+    server.vm.box = "boxcutter/debian79-i386"
     server.vm.network "private_network", ip: "192.168.33.12", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "4096"]
