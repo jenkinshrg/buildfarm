@@ -33,6 +33,7 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--memory", "1024"]
       vb.customize ["modifyvm", :id, "--cpus", "1"]
     end
+    server.vm.provision "docker"
     server.vm.provision "shell", path: "setup/misc.sh", privileged: false
     server.vm.provision "shell", path: "setup/jnlp.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
