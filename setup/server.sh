@@ -23,6 +23,7 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cppcheck
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin valgrind
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin xunit
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin email-ext
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin join
 rm jenkins-cli.jar
 sudo service jenkins restart
 sleep 30
