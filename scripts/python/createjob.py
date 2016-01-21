@@ -245,7 +245,7 @@ source .jenkins.sh</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>changes.txt,googledrive.txt</artifacts>
+      <artifacts>changes.txt,artifacts.txt</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
