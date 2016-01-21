@@ -13,6 +13,7 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin multiple-scms
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin embeddable-build-status
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper 
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor 
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin parameterized-trigger
 #java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cmakebuilder
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin warnings
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cobertura
