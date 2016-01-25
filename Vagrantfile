@@ -3,7 +3,6 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
-  config.vm.synced_folder "~", "/share"
   config.vm.synced_folder "~/Documents", "/home/vagrant/Documents"
   config.vm.provision "shell", path: "setup/common.sh", privileged: false
   config.vm.define "master", autostart: true, primary: true do |server|
@@ -11,8 +10,8 @@ Vagrant.configure(2) do |config|
     server.vm.network "forwarded_port", guest: 9000, host: 9000
     server.vm.network "private_network", ip: "192.168.33.10", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
-      vb.cpus = "1"
+      vb.memory = "4096"
+      vb.cpus = "2"
     end
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
     server.vm.provision "shell", path: "setup/misc.sh", privileged: false
