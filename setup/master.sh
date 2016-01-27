@@ -4,8 +4,8 @@ wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add
 sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
 sudo apt-get -y install jenkins
-
 sleep 30
+
 wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin multiple-scms
