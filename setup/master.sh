@@ -26,7 +26,7 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin multiple-scms
 #java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin clone-workspace-scm
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin embeddable-build-status
-java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper 
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper
 #java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor 
 #java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin parameterized-trigger
 #java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cmakebuilder
@@ -43,6 +43,3 @@ rm jenkins-cli.jar
 
 sudo service jenkins restart
 sleep 30
-
-sudo sh -c "echo '59 * * * * vagrant cd /home/vagrant && rm -fr jenkinshrg.github.io && git clone https://github.com/jenkinshrg/jenkinshrg.github.io.git && cd jenkinshrg.github.io && bash -xe .jenkins.sh' >> /etc/crontab"
-sudo service cron restart
