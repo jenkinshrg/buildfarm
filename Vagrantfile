@@ -23,9 +23,18 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-wall https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-balancebeam https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
   end
+  config.vm.define "slave", autostart: false do |server|
+    server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
+    server.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+      vb.cpus = "2"
+    end
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
+  end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
     server.vm.box = "boxcutter/debian79-i386"
-    server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
+    server.vm.network "private_network", ip: "192.168.33.12", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "4096"
       vb.cpus = "2"
@@ -35,7 +44,7 @@ Vagrant.configure(2) do |config|
   end
   config.vm.define "ubuntu-trusty-amd64", autostart: false do |server|
     server.vm.box = "boxcutter/ubuntu1404"
-    server.vm.network "private_network", ip: "192.168.33.12", virtualbox__intnet: "intnet0"
+    server.vm.network "private_network", ip: "192.168.33.13", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "4096"
       vb.cpus = "2"
@@ -45,7 +54,7 @@ Vagrant.configure(2) do |config|
   end
   config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
     server.vm.box = "boxcutter/ubuntu1404-desktop"
-    server.vm.network "private_network", ip: "192.168.33.13", virtualbox__intnet: "intnet0"
+    server.vm.network "private_network", ip: "192.168.33.14", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "4096"
       vb.cpus = "2"
