@@ -15,15 +15,10 @@ Vagrant.configure(2) do |config|
       vb.cpus = "1"
     end
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
-    server.vm.provision "shell", path: "setup/misc.sh", privileged: false
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 slave", privileged: false
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "debian-wheezy-i386", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-32 https://github.com/jenkinshrg/drcutil.git drcutil debian-wheezy-i386 debian-wheezy-i386", privileged: false
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 ubuntu-trusty-amd64", privileged: false
-    # server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64-desktop", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-desktop https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 ubuntu-trusty-amd64-desktop periodic", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-desktop https://github.com/jenkinshrg/drcutil.git drcutil ubuntu-trusty-amd64 ubuntu-trusty-amd64-desktop periodic", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
     server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
@@ -31,7 +26,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "setup/misc.sh", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
@@ -41,7 +36,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "setup/misc.sh", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "debian-wheezy-i386 /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "debian-wheezy-i386 http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "ubuntu-trusty-amd64", autostart: false do |server|
@@ -51,7 +46,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "setup/misc.sh", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64 /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "ubuntu-trusty-amd64 http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
@@ -61,7 +56,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "setup/misc.sh", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64-desktop /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "ubuntu-trusty-amd64-desktop http://192.168.33.10:8080", privileged: false
   end
 end
