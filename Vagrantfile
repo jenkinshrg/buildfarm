@@ -11,21 +11,19 @@ Vagrant.configure(2) do |config|
     server.vm.network "forwarded_port", guest: 9000, host: 9000
     server.vm.network "private_network", ip: "192.168.33.10", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
-      vb.memory = "4096"
-      vb.cpus = "2"
+      vb.memory = "1024"
+      vb.cpus = "1"
     end
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil https://github.com/jenkinshrg/drcutil.git drcutil jenkins slave scm", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-32 https://github.com/jenkinshrg/drcutil.git drcutil jenkins debian-wheezy-i386", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64", privileged: false
-    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-32 https://github.com/jenkinshrg/drcutil.git drcutil jenkins debian-wheezy-i386 periodic", privileged: false
-    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64 periodic", privileged: false
-    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-walk https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil https://github.com/jenkinshrg/drcutil.git drcutil jenkins slave scm", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-32 https://github.com/jenkinshrg/drcutil.git drcutil jenkins debian-wheezy-i386 upstream", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64 upstream", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-balancebeam https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-terrain https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-valve https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-walk https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
     server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-wall https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-balancebeam https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    server.vm.provision "shell", path: "scripts/createjob.sh", args: "report https://github.com/jenkinshrg/jenkinshrg.github.io.git jenkinshrg.github.io master slave periodic", privileged: false
+    server.vm.provision "shell", path: "scripts/createjob.sh", args: "report https://github.com/jenkinshrg/jenkinshrg.github.io.git jenkinshrg.github.io master slave", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
     server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
