@@ -15,15 +15,15 @@ Vagrant.configure(2) do |config|
       vb.cpus = "1"
     end
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil https://github.com/jenkinshrg/drcutil.git drcutil jenkins slave scm", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-32 https://github.com/jenkinshrg/drcutil.git drcutil jenkins debian-wheezy-i386 upstream", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64 upstream", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-balancebeam https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-terrain https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-valve https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-walk https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "drcutil-task-wall https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
-    # server.vm.provision "shell", path: "scripts/createjob.sh", args: "report https://github.com/jenkinshrg/jenkinshrg.github.io.git jenkinshrg.github.io master slave", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil https://github.com/jenkinshrg/drcutil.git drcutil jenkins slave scm", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-32 https://github.com/jenkinshrg/drcutil.git drcutil jenkins debian-wheezy-i386 upstream", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-64 https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64 upstream", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-task-balancebeam https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-task-terrain https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-task-valve https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-task-walk https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "drcutil-task-wall https://github.com/jenkinshrg/drcutil.git drcutil jenkins ubuntu-trusty-amd64-desktop periodic", privileged: false
+    # server.vm.provision "shell", path: "scripts/cli/createjob.sh", args: "report https://github.com/jenkinshrg/jenkinshrg.github.io.git jenkinshrg.github.io master slave", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
     server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "slave /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
@@ -41,7 +41,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "debian-wheezy-i386 /home/vagrant http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "debian-wheezy-i386 /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "debian-wheezy-i386 http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "ubuntu-trusty-amd64", autostart: false do |server|
@@ -51,7 +51,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64 /home/vagrant http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "ubuntu-trusty-amd64 /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "ubuntu-trusty-amd64 http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
@@ -61,7 +61,7 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "2"
     end
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64-desktop /home/vagrant http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "ubuntu-trusty-amd64-desktop /home/vagrant http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "ubuntu-trusty-amd64-desktop http://192.168.33.10:8080", privileged: false
   end
 end

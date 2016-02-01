@@ -797,10 +797,24 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-rm -fr jenkinshrg.github.io
-git clone https://github.com/jenkinshrg/jenkinshrg.github.io.git
-cd jenkinshrg.github.io
-source .jenkins.sh</command>
+set -xe
+if [ -v CONTAINER ]; then
+rm -fr src
+rm -fr openrtp
+rm -fr ${REPO_DIR}
+git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
+sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
+set -xe
+cd ${REPO_DIR}
+source .jenkins.sh
+EOL
+)"
+else
+rm -fr ${REPO_DIR}
+git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
+cd ${REPO_DIR}
+source .jenkins.sh
+fi</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
@@ -810,6 +824,7 @@ source .jenkins.sh</command>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.2"/>
   </buildWrappers>
+</project>
 EOF
 fi
 
