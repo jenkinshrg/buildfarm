@@ -22,7 +22,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>7</daysToKeep>
+        <daysToKeep>2</daysToKeep>
         <numToKeep>-1</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
@@ -250,7 +250,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>7</daysToKeep>
+        <daysToKeep>2</daysToKeep>
         <numToKeep>-1</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
@@ -307,7 +307,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>7</daysToKeep>
+        <daysToKeep>2</daysToKeep>
         <numToKeep>-1</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
@@ -362,7 +362,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>7</daysToKeep>
+        <daysToKeep>2</daysToKeep>
         <numToKeep>-1</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
@@ -631,7 +631,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>7</daysToKeep>
+        <daysToKeep>2</daysToKeep>
         <numToKeep>-1</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
@@ -893,7 +893,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>7</daysToKeep>
+        <daysToKeep>2</daysToKeep>
         <numToKeep>-1</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
