@@ -6,7 +6,9 @@ REPO_DIR=${3}
 BRANCH=${4}
 NODE=${5-master}
 TRIGGER=${6-none}
-URL=${7:-http://localhost:8080}
+FUNC=${7-all}
+TEST=${8-all}
+URL=${9:-http://localhost:8080}
 
 wget -q ${URL}/jnlpJars/jenkins-cli.jar
 
@@ -286,14 +288,14 @@ git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
 set -xe
 cd ${REPO_DIR}
-source .jenkins.sh
+source .jenkins.sh ${FUNC} ${TEST}
 EOL
 )"
 else
 rm -fr ${REPO_DIR}
 git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 cd ${REPO_DIR}
-source .jenkins.sh
+source .jenkins.sh ${FUNC} ${TEST}
 fi</command>
     </hudson.tasks.Shell>
   </builders>
@@ -548,14 +550,14 @@ git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
 set -xe
 cd ${REPO_DIR}
-source .jenkins.sh
+source .jenkins.sh ${FUNC} ${TEST}
 EOL
 )"
 else
 rm -fr ${REPO_DIR}
 git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 cd ${REPO_DIR}
-source .jenkins.sh
+source .jenkins.sh ${FUNC} ${TEST}
 fi</command>
     </hudson.tasks.Shell>
   </builders>

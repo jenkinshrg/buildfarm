@@ -19,4 +19,3 @@ name = args.name
 j = jenkins.Jenkins(url, username, password)
 
 j.delete_job(name)
-
