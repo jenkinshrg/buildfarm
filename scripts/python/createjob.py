@@ -26,31 +26,13 @@ name = args.name
 #node = args.node
 #trigger = args.trigger
 
-CONFIG_XML = """<?xml version='1.0' encoding='UTF-8'?>
+CONFIG_XML = """
+<?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <hudson.plugins.openshift.OpenShiftApplicationUUIDJobProperty plugin="openshift@1.4">
-      <applicationUUID></applicationUUID>
-    </hudson.plugins.openshift.OpenShiftApplicationUUIDJobProperty>
-    <hudson.plugins.openshift.OpenShiftBuilderSizeJobProperty plugin="openshift@1.4">
-      <builderSize>small</builderSize>
-    </hudson.plugins.openshift.OpenShiftBuilderSizeJobProperty>
-    <hudson.plugins.openshift.OpenShiftBuilderTimeoutJobProperty plugin="openshift@1.4">
-      <builderTimeout>300000</builderTimeout>
-    </hudson.plugins.openshift.OpenShiftBuilderTimeoutJobProperty>
-    <hudson.plugins.openshift.OpenShiftBuilderTypeJobProperty plugin="openshift@1.4">
-      <builderType></builderType>
-    </hudson.plugins.openshift.OpenShiftBuilderTypeJobProperty>
-    <hudson.plugins.openshift.OpenShiftPlatformJobProperty plugin="openshift@1.4">
-      <platform>linux</platform>
-    </hudson.plugins.openshift.OpenShiftPlatformJobProperty>
-    <hudson.plugins.openshift.OpenShiftRegionJobProperty plugin="openshift@1.4">
-      <region></region>
-    </hudson.plugins.openshift.OpenShiftRegionJobProperty>
-  </properties>
+  <properties/>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
@@ -61,7 +43,8 @@ CONFIG_XML = """<?xml version='1.0' encoding='UTF-8'?>
   <builders/>
   <publishers/>
   <buildWrappers/>
-</project>""" % locals()
+</project>
+""" % locals()
 
 j = jenkins.Jenkins(url, username, password)
 
