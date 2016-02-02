@@ -275,7 +275,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     <ignoreDirPropChanges>false</ignoreDirPropChanges>
     <filterChangelog>false</filterChangelog>
   </scm>
-  <assignedNode>slave</assignedNode>
+  <assignedNode>${NODE}</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -330,7 +330,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     <submoduleCfg class="list"/>
     <extensions/>
   </scm>
-  <assignedNode>slave</assignedNode>
+  <assignedNode>${NODE}</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
