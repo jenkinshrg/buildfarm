@@ -600,6 +600,36 @@ fi</command>
             <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.StatusChangedTrigger>
+        <hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>\$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>\$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>\$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+        <hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>\$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>\$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>\$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>\$DEFAULT_SUBJECT</defaultSubject>
@@ -862,6 +892,36 @@ fi</command>
             <contentType>project</contentType>
           </email>
         </hudson.plugins.emailext.plugins.trigger.StatusChangedTrigger>
+        <hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>\$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>\$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>\$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.StillFailingTrigger>
+        <hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
+          <email>
+            <recipientList></recipientList>
+            <subject>\$PROJECT_DEFAULT_SUBJECT</subject>
+            <body>\$PROJECT_DEFAULT_CONTENT</body>
+            <recipientProviders>
+              <hudson.plugins.emailext.plugins.recipients.ListRecipientProvider/>
+            </recipientProviders>
+            <attachmentsPattern></attachmentsPattern>
+            <attachBuildLog>false</attachBuildLog>
+            <compressBuildLog>false</compressBuildLog>
+            <replyTo>\$PROJECT_DEFAULT_REPLYTO</replyTo>
+            <contentType>project</contentType>
+          </email>
+        </hudson.plugins.emailext.plugins.trigger.StillUnstableTrigger>
       </configuredTriggers>
       <contentType>default</contentType>
       <defaultSubject>\$DEFAULT_SUBJECT</defaultSubject>
