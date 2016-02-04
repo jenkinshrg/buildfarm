@@ -599,6 +599,30 @@ fi</command>
           <exclZero>false</exclZero>
           <logarithmic>false</logarithmic>
         </hudson.plugins.plot.Plot>
+        <hudson.plugins.plot.Plot>
+          <title>rss memory</title>
+          <yaxis>KB</yaxis>
+          <series>
+            <hudson.plugins.plot.CSVSeries>
+              <file>choreonoid.csv</file>
+              <label></label>
+              <fileType>csv</fileType>
+              <inclusionFlag>OFF</inclusionFlag>
+              <exclusionValues></exclusionValues>
+              <url></url>
+              <displayTableFlag>false</displayTableFlag>
+            </hudson.plugins.plot.CSVSeries>
+          </series>
+          <group>choreonoid</group>
+          <numBuilds></numBuilds>
+          <csvFileName>2034364873.csv</csvFileName>
+          <csvLastModification>0</csvLastModification>
+          <style>line</style>
+          <useDescr>false</useDescr>
+          <keepRecords>false</keepRecords>
+          <exclZero>false</exclZero>
+          <logarithmic>false</logarithmic>
+        </hudson.plugins.plot.Plot>
       </plots>
     </hudson.plugins.plot.PlotPublisher>
     <hudson.tasks.BuildTrigger>
@@ -912,6 +936,30 @@ fi</command>
           <group>system</group>
           <numBuilds></numBuilds>
           <csvFileName>1886652548.csv</csvFileName>
+          <csvLastModification>0</csvLastModification>
+          <style>line</style>
+          <useDescr>false</useDescr>
+          <keepRecords>false</keepRecords>
+          <exclZero>false</exclZero>
+          <logarithmic>false</logarithmic>
+        </hudson.plugins.plot.Plot>
+        <hudson.plugins.plot.Plot>
+          <title>rss memory</title>
+          <yaxis>KB</yaxis>
+          <series>
+            <hudson.plugins.plot.CSVSeries>
+              <file>choreonoid.csv</file>
+              <label></label>
+              <fileType>csv</fileType>
+              <inclusionFlag>OFF</inclusionFlag>
+              <exclusionValues></exclusionValues>
+              <url></url>
+              <displayTableFlag>false</displayTableFlag>
+            </hudson.plugins.plot.CSVSeries>
+          </series>
+          <group>choreonoid</group>
+          <numBuilds></numBuilds>
+          <csvFileName>2034364873.csv</csvFileName>
           <csvLastModification>0</csvLastModification>
           <style>line</style>
           <useDescr>false</useDescr>
