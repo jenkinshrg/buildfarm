@@ -577,7 +577,7 @@ fi</command>
       <plots>
         <hudson.plugins.plot.Plot>
           <title>used memory</title>
-          <yaxis>KB</yaxis>
+          <yaxis>MB</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
               <file>system.csv</file>
@@ -897,7 +897,7 @@ fi</command>
       <plots>
         <hudson.plugins.plot.Plot>
           <title>used memory</title>
-          <yaxis>KB</yaxis>
+          <yaxis>MB</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
               <file>system.csv</file>
