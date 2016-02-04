@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
-  config.vm.synced_folder "~/Documents", "/home/vagrant/Documents"
+  config.vm.synced_folder "~/.jenkinshrg", "/home/vagrant/.jenkinshrg"
   config.vm.provision "shell", path: "setup/base.sh", privileged: false
   config.vm.provision "shell", path: "setup/common.sh", privileged: false
   config.vm.define "master", primary: true do |server|
