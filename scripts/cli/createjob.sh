@@ -413,7 +413,7 @@ fi</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>system.csv,core,*.log,changes.txt,artifacts.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv,irex-balance-beam-auto.txt,irex-balance-beam-auto.png,irex-balance-beam-auto.ogv</artifacts>
+      <artifacts>choreonoid.csv,system.csv,core,*.log,changes.txt,artifacts.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv,irex-balance-beam-auto.txt,irex-balance-beam-auto.png,irex-balance-beam-auto.ogv</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -600,7 +600,7 @@ fi</command>
           <logarithmic>false</logarithmic>
         </hudson.plugins.plot.Plot>
         <hudson.plugins.plot.Plot>
-          <title>rss memory</title>
+          <title>used memory</title>
           <yaxis>KB</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
@@ -757,7 +757,7 @@ fi</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>system.csv,core,*.log,changes.txt,artifacts.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv,irex-balance-beam-auto.txt,irex-balance-beam-auto.png,irex-balance-beam-auto.ogv</artifacts>
+      <artifacts>choreonoid.csv,system.csv,core,*.log,changes.txt,artifacts.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv,irex-balance-beam-auto.txt,irex-balance-beam-auto.png,irex-balance-beam-auto.ogv</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -944,7 +944,7 @@ fi</command>
           <logarithmic>false</logarithmic>
         </hudson.plugins.plot.Plot>
         <hudson.plugins.plot.Plot>
-          <title>rss memory</title>
+          <title>used memory</title>
           <yaxis>KB</yaxis>
           <series>
             <hudson.plugins.plot.CSVSeries>
