@@ -15,22 +15,22 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
-    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "slave /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://jenkinshrg.a01.aist.go.jp", privileged: false
   end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
     server.vm.box = "boxcutter/debian79-i386"
-    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "debian-wheezy-i386 /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "debian-wheezy-i386 /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "debian-wheezy-i386 http://jenkinshrg.a01.aist.go.jp", privileged: false
   end
   config.vm.define "ubuntu-trusty-amd64", autostart: false do |server|
     server.vm.box = "boxcutter/ubuntu1404"
-    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "ubuntu-trusty-amd64 /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64 /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "ubuntu-trusty-amd64 http://jenkinshrg.a01.aist.go.jp", privileged: false
   end
   config.vm.define "ubuntu-trusty-64-desktop", autostart: false do |server|
     server.vm.box = "boxcutter/ubuntu1404-desktop"
-    server.vm.provision "shell", path: "scripts/cli/createnode.sh", args: "ubuntu-trusty-amd64-desktop /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "ubuntu-trusty-amd64-desktop /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "ubuntu-trusty-amd64-desktop http://jenkinshrg.a01.aist.go.jp", privileged: false
   end
 end
