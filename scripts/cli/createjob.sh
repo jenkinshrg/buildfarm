@@ -1035,7 +1035,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     </jenkins.model.BuildDiscarderProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <assignedNode>slave</assignedNode>
+  <assignedNode>${NODE}</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
