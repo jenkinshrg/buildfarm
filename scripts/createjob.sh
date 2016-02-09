@@ -31,31 +31,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   </properties>
   <scm class="org.jenkinsci.plugins.multiplescms.MultiSCM" plugin="multiple-scms@0.5">
     <scms>
-      <hudson.scm.SubversionSCM plugin="subversion@1.54">
-        <locations>
-          <hudson.scm.SubversionSCM_-ModuleLocation>
-            <remote>https://atom.a01.aist.go.jp/svn/HRP2/trunk</remote>
-            <local>src/HRP2</local>
-            <depthOption>infinity</depthOption>
-            <ignoreExternalsOption>false</ignoreExternalsOption>
-          </hudson.scm.SubversionSCM_-ModuleLocation>
-          <hudson.scm.SubversionSCM_-ModuleLocation>
-            <remote>https://atom.a01.aist.go.jp/svn/hrprtc/trunk</remote>
-            <local>src/hrpsys-private</local>
-            <depthOption>infinity</depthOption>
-            <ignoreExternalsOption>false</ignoreExternalsOption>
-          </hudson.scm.SubversionSCM_-ModuleLocation>
-        </locations>
-        <excludedRegions></excludedRegions>
-        <includedRegions></includedRegions>
-        <excludedUsers></excludedUsers>
-        <excludedRevprop></excludedRevprop>
-        <excludedCommitMessages></excludedCommitMessages>
-        <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
-        <ignoreDirPropChanges>false</ignoreDirPropChanges>
-        <filterChangelog>false</filterChangelog>
-      </hudson.scm.SubversionSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -78,7 +54,76 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
           </hudson.plugins.git.extensions.impl.ScmName>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>ssh://atom.a01.aist.go.jp/git/HRP2</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/master</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>src/HRP2</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+          <hudson.plugins.git.extensions.impl.ScmName>
+            <name>HRP2</name>
+          </hudson.plugins.git.extensions.impl.ScmName>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>ssh://atom.a01.aist.go.jp/git/HRP2KAI</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/master</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>src/HRP2KAI</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+          <hudson.plugins.git.extensions.impl.ScmName>
+            <name>HRP2KAI</name>
+          </hudson.plugins.git.extensions.impl.ScmName>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>ssh://atom.a01.aist.go.jp/git/hrpsys-private</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>*/master</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions>
+          <hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+            <relativeTargetDir>src/hrpsys-private</relativeTargetDir>
+          </hudson.plugins.git.extensions.impl.RelativeTargetDirectory>
+          <hudson.plugins.git.extensions.impl.ScmName>
+            <name>hrpsys-private</name>
+          </hudson.plugins.git.extensions.impl.ScmName>
+        </extensions>
+      </hudson.plugins.git.GitSCM>
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -101,7 +146,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
           </hudson.plugins.git.extensions.impl.ScmName>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -124,7 +169,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
           </hudson.plugins.git.extensions.impl.ScmName>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -147,7 +192,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
           </hudson.plugins.git.extensions.impl.ScmName>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -170,7 +215,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
           </hudson.plugins.git.extensions.impl.ScmName>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
@@ -193,7 +238,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
           </hudson.plugins.git.extensions.impl.ScmName>
         </extensions>
       </hudson.plugins.git.GitSCM>
-      <hudson.plugins.git.GitSCM plugin="git@2.4.0">
+      <hudson.plugins.git.GitSCM plugin="git@2.4.2">
         <configVersion>2</configVersion>
         <userRemoteConfigs>
           <hudson.plugins.git.UserRemoteConfig>
