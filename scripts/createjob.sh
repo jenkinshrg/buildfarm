@@ -281,7 +281,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.2"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.4"/>
   </buildWrappers>
 </project>
 EOF
@@ -575,7 +575,7 @@ fi</command>
         <failBuildOnInvalidReports>false</failBuildOnInvalidReports>
       </valgrindPublisherConfig>
     </org.jenkinsci.plugins.valgrind.ValgrindPublisher>
-    <xunit plugin="xunit@1.98">
+    <xunit plugin="xunit@1.100">
       <types>
         <CTestType>
           <pattern>**/Test.xml</pattern>
@@ -729,7 +729,7 @@ fi</command>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.2"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.4"/>
   </buildWrappers>
 </project>
 EOF
@@ -904,7 +904,7 @@ fi</command>
         <failBuildOnInvalidReports>false</failBuildOnInvalidReports>
       </valgrindPublisherConfig>
     </org.jenkinsci.plugins.valgrind.ValgrindPublisher>
-    <xunit plugin="xunit@1.98">
+    <xunit plugin="xunit@1.100">
       <types>
         <CTestType>
           <pattern>**/Test.xml</pattern>
@@ -1058,7 +1058,7 @@ fi</command>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.2"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.4"/>
   </buildWrappers>
 </project>
 EOF
@@ -1115,7 +1115,7 @@ fi</command>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.2"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.4"/>
   </buildWrappers>
 </project>
 EOF
