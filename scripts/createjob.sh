@@ -436,14 +436,14 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-set -xe
+set -e
 if [ -v CONTAINER ]; then
 rm -fr src
 rm -fr openrtp
 rm -fr ${REPO_DIR}
 git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
-set -xe
+set -e
 cd ${REPO_DIR}
 source .jenkins.sh ${FUNC} ${TEST}
 EOL
@@ -765,14 +765,14 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-set -xe
+set -e
 if [ -v CONTAINER ]; then
 rm -fr src
 rm -fr openrtp
 rm -fr ${REPO_DIR}
 git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
-set -xe
+set -e
 cd ${REPO_DIR}
 source .jenkins.sh ${FUNC} ${TEST}
 EOL
@@ -1090,14 +1090,14 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-set -xe
+set -e
 if [ -v CONTAINER ]; then
 rm -fr src
 rm -fr openrtp
 rm -fr ${REPO_DIR}
 git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
 sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
-set -xe
+set -e
 cd ${REPO_DIR}
 source .jenkins.sh
 EOL
