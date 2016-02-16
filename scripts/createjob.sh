@@ -6,6 +6,7 @@ REPO_DIR=${3}
 BRANCH=${4}
 NODE=${5-master}
 OS=ubuntu
+ARCH=amd64
 DISTRO=trusty
 TRIGGER=${6-none}
 FUNC=${7-all}
