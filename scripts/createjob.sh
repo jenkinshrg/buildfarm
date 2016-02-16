@@ -10,10 +10,14 @@ FUNC=${7-all}
 TEST=${8-all}
 URL=${9:-http://localhost:8080}
 
-wget -q ${URL}/jnlpJars/jenkins-cli.jar
+OS=ubuntu
+DISTRO=trusty
+IMAGE=original/$OS:$DISTRO
 
-if [ "${TRIGGER}" = "scm" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
+wget -q $URL/jnlpJars/jenkins-cli.jar
+
+if [ "$TRIGGER" = "scm" ]; then
+cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -263,7 +267,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
       </hudson.plugins.git.GitSCM>
     </scms>
   </scm>
-  <assignedNode>${NODE}</assignedNode>
+  <assignedNode>$NODE</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -285,8 +289,8 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   </buildWrappers>
 </project>
 EOF
-elif [ "${TRIGGER}" = "scmsvn" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
+elif [ "$TRIGGER" = "scmsvn" ]; then
+cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -320,7 +324,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     <ignoreDirPropChanges>false</ignoreDirPropChanges>
     <filterChangelog>false</filterChangelog>
   </scm>
-  <assignedNode>${NODE}</assignedNode>
+  <assignedNode>$NODE</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -342,8 +346,8 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   </buildWrappers>
 </project>
 EOF
-elif [ "${TRIGGER}" = "scmgit" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
+elif [ "$TRIGGER" = "scmgit" ]; then
+cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -375,7 +379,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     <submoduleCfg class="list"/>
     <extensions/>
   </scm>
-  <assignedNode>${NODE}</assignedNode>
+  <assignedNode>$NODE</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -397,8 +401,8 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
   </buildWrappers>
 </project>
 EOF
-elif [ "${TRIGGER}" = "upstream" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
+elif [ "$TRIGGER" = "upstream" ]; then
+cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -415,7 +419,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     </jenkins.model.BuildDiscarderProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <assignedNode>${NODE}</assignedNode>
+  <assignedNode>$NODE</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -440,21 +444,21 @@ set -e
 if [ -v CONTAINER ]; then
 rm -fr src
 rm -fr openrtp
-rm -fr ${REPO_DIR}
-git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
-sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
+rm -fr $REPO_DIR
+git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 $IMAGE /bin/bash -c "$(cat << EOL
 set -e
-cd ${REPO_DIR}
+cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
-source .jenkins.sh ${FUNC} ${TEST}
+source .jenkins.sh $FUNC $TEST
 EOL
 )"
 else
-rm -fr ${REPO_DIR}
-git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
-cd ${REPO_DIR}
+rm -fr $REPO_DIR
+git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
-source .jenkins.sh ${FUNC} ${TEST}
+source .jenkins.sh $FUNC $TEST
 fi</command>
     </hudson.tasks.Shell>
   </builders>
@@ -735,8 +739,8 @@ fi</command>
   </buildWrappers>
 </project>
 EOF
-elif [ "${TRIGGER}" = "periodic" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
+elif [ "$TRIGGER" = "periodic" ]; then
+cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -753,7 +757,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     </jenkins.model.BuildDiscarderProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <assignedNode>${NODE}</assignedNode>
+  <assignedNode>$NODE</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -771,21 +775,21 @@ set -e
 if [ -v CONTAINER ]; then
 rm -fr src
 rm -fr openrtp
-rm -fr ${REPO_DIR}
-git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
-sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
+rm -fr $REPO_DIR
+git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 $IMAGE /bin/bash -c "$(cat << EOL
 set -e
-cd ${REPO_DIR}
+cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
-source .jenkins.sh ${FUNC} ${TEST}
+source .jenkins.sh $FUNC $TEST
 EOL
 )"
 else
-rm -fr ${REPO_DIR}
-git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
-cd ${REPO_DIR}
+rm -fr $REPO_DIR
+git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
-source .jenkins.sh ${FUNC} ${TEST}
+source .jenkins.sh $FUNC $TEST
 fi</command>
     </hudson.tasks.Shell>
   </builders>
@@ -1067,7 +1071,7 @@ fi</command>
 </project>
 EOF
 else
-cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
+cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -1084,7 +1088,7 @@ cat << EOF | java -jar jenkins-cli.jar -s ${URL} create-job ${NAME}
     </jenkins.model.BuildDiscarderProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
-  <assignedNode>${NODE}</assignedNode>
+  <assignedNode>$NODE</assignedNode>
   <canRoam>false</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -1098,19 +1102,19 @@ set -e
 if [ -v CONTAINER ]; then
 rm -fr src
 rm -fr openrtp
-rm -fr ${REPO_DIR}
-git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
-sudo docker run --rm -t -e DISPLAY=${DISPLAY} -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=${JOB_NAME} -e WORKSPACE=/home/docker/workspace -v ${WORKSPACE}:/home/docker/workspace -w /home/docker/workspace -v ${HOME}/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 ${IMAGE} /bin/bash -c "$(cat << EOL
+rm -fr $REPO_DIR
+git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 $IMAGE /bin/bash -c "$(cat << EOL
 set -e
-cd ${REPO_DIR}
+cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
 source .jenkins.sh
 EOL
 )"
 else
-rm -fr ${REPO_DIR}
-git clone --branch ${BRANCH} --single-branch ${REPO_URL} ${REPO_DIR}
-cd ${REPO_DIR}
+rm -fr $REPO_DIR
+git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+cd $REPO_DIR
 source .jenkins.sh
 fi</command>
     </hudson.tasks.Shell>
