@@ -15,8 +15,8 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://jenkinshrg.a01.aist.go.jp", privileged: false
-    server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://jenkinshrg.a01.aist.go.jp", privileged: false
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://localhost:8080", privileged: false
+    server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://localhost:8080", privileged: false
   end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
     server.vm.box = "boxcutter/debian79-i386"
