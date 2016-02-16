@@ -9,5 +9,4 @@ sudo apt-get update
 
 sudo apt-get -y install openjdk-7-jdk
 
-sudo apt-get -y install subversion
 sudo apt-get -y install git

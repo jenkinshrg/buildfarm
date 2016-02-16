@@ -8,6 +8,5 @@
 ./scripts/createjob.sh drcutil-task-balancebeam https://github.com/jenkinshrg/drcutil.git              drcutil              jenkins ubuntu-trusty-amd64-desktop periodic task       balancebeam http://jenkinshrg.a01.aist.go.jp
 ./scripts/createjob.sh drcutil-task-terrain     https://github.com/jenkinshrg/drcutil.git              drcutil              jenkins ubuntu-trusty-amd64-desktop periodic task       terrain     http://jenkinshrg.a01.aist.go.jp
 ./scripts/createjob.sh drcutil-task-valve       https://github.com/jenkinshrg/drcutil.git              drcutil              jenkins ubuntu-trusty-amd64-desktop periodic task       valve       http://jenkinshrg.a01.aist.go.jp
-./scripts/createjob.sh drcutil-task-walk        https://github.com/jenkinshrg/drcutil.git              drcutil              jenkins ubuntu-trusty-amd64-desktop periodic task       walk        http://jenkinshrg.a01.aist.go.jp
 ./scripts/createjob.sh drcutil-task-wall        https://github.com/jenkinshrg/drcutil.git              drcutil              jenkins ubuntu-trusty-amd64-desktop periodic task       wall        http://jenkinshrg.a01.aist.go.jp
 ./scripts/createjob.sh report                   https://github.com/jenkinshrg/jenkinshrg.github.io.git jenkinshrg.github.io master  slave                       none     all        all         http://jenkinshrg.a01.aist.go.jp
