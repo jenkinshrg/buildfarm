@@ -12,11 +12,13 @@ Vagrant.configure(2) do |config|
   config.vm.define "master", primary: true do |server|
     server.vm.network "forwarded_port", guest: 8080, host: 8080
     server.vm.network "forwarded_port", guest: 9000, host: 9000
+    server.vm.network "private_network", ip: "192.168.33.10", virtualbox__intnet: "intnet0"
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
-    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://localhost:8080", privileged: false
-    server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://localhost:8080", privileged: false
+    server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
+    server.vm.provision "shell", path: "scripts/createnode.sh", args: "slave /home/vagrant http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
   config.vm.define "debian-wheezy-i386", autostart: false do |server|
     server.vm.box = "boxcutter/debian79-i386"
