@@ -5,14 +5,12 @@ REPO_URL=${2}
 REPO_DIR=${3}
 BRANCH=${4}
 NODE=${5-master}
+OS=ubuntu
+DISTRO=trusty
 TRIGGER=${6-none}
 FUNC=${7-all}
 TEST=${8-all}
 URL=${9:-http://localhost:8080}
-
-OS=ubuntu
-DISTRO=trusty
-IMAGE=original/$OS:$DISTRO
 
 wget -q $URL/jnlpJars/jenkins-cli.jar
 
@@ -446,7 +444,7 @@ rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 $IMAGE /bin/bash -c "$(cat << EOL
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "$(cat << EOL
 set -e
 cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
@@ -777,7 +775,7 @@ rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 $IMAGE /bin/bash -c "$(cat << EOL
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "$(cat << EOL
 set -e
 cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
@@ -1104,7 +1102,7 @@ rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 $IMAGE /bin/bash -c "$(cat << EOL
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "$(cat << EOL
 set -e
 cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
