@@ -1,17 +1,27 @@
 #!/bin/bash
 
-NAME=${1}
-REPO_URL=${2}
-REPO_DIR=${3}
-BRANCH=${4}
-NODE=${5-master}
-OS=ubuntu
-ARCH=amd64
-DISTRO=trusty
-TRIGGER=${6-none}
-FUNC=${7-all}
-TEST=${8-all}
-URL=${9:-http://localhost:8080}
+NAME=${1-debug}
+REPO_URL=${2-https://github.com/jenkinshrg/drcutil.git}
+REPO_DIR=${3-drcutil}
+BRANCH=${4-jenkins}
+NODE=${5-slave}
+OS=${6-none}
+DISTRO=${7-none}
+ARCH=${8-none}
+TRIGGER=${9-none}
+FUNC=${10-all}
+TEST=${11-all}
+URL=${12:-http://jenkinshrg.a01.aist.go.jp}
+
+if [ "$OS" = "debian" ]; then
+MIRROR=http://ftp.jp.debian.org/debian/
+COMPONENTS=main,contrib,non-free
+INCLUDE=iproute,iputils-ping,sudo
+elif [ "$OS" = "ubuntu" ]; then
+MIRROR=http://ftp.jaist.ac.jp/pub/Linux/ubuntu/
+COMPONENTS=main,restricted,universe,multiverse
+INCLUDE=iproute,iputils-ping,sudo
+fi
 
 wget -q $URL/jnlpJars/jenkins-cli.jar
 
@@ -441,13 +451,34 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
       <command>#!/bin/bash
 set -e
 if [ -v CONTAINER ]; then
+if [ "\$(sudo docker images -q base/$OS:$DISTRO)" = "" ]; then
+rm -fr docker
+git clone --depth 1 https://github.com/docker/docker.git
+cd docker/contrib
+sudo ./mkimage.sh -t base/$OS:$DISTRO debootstrap --verbose --variant=buildd --include=$INCLUDE --components=$COMPONENTS --arch=$ARCH $DISTRO $MIRROR
+cd ../..
+rm -fr docker
+fi
+if [ "\$(sudo docker images -q original/$OS:$DISTRO)" = "" ]; then
+cat &lt;&lt; EOL | sudo docker build -t original/$OS:$DISTRO -
+FROM base/$OS:$DISTRO
+RUN sudo useradd -m -d /home/docker -s /bin/bash docker
+RUN sudo sh -c 'echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+USER docker
+WORKDIR /home/docker
+ENV USER docker
+ENV HOME /home/docker
+ENV DEBIAN_FRONTEND noninteractive
+EOL
+fi
 rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "$(cat << EOL
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
+source \$HOME/.jenkinshrg/install/credential.sh
 source \$HOME/.jenkinshrg/scripts/env.sh
 source .jenkins.sh $FUNC $TEST
 EOL
@@ -772,13 +803,34 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
       <command>#!/bin/bash
 set -e
 if [ -v CONTAINER ]; then
+if [ "\$(sudo docker images -q base/$OS:$DISTRO)" = "" ]; then
+rm -fr docker
+git clone --depth 1 https://github.com/docker/docker.git
+cd docker/contrib
+sudo ./mkimage.sh -t base/$OS:$DISTRO debootstrap --verbose --variant=buildd --include=$INCLUDE --components=$COMPONENTS --arch=$ARCH $DISTRO $MIRROR
+cd ../..
+rm -fr docker
+fi
+if [ "\$(sudo docker images -q original/$OS:$DISTRO)" = "" ]; then
+cat &lt;&lt; EOL | sudo docker build -t original/$OS:$DISTRO -
+FROM base/$OS:$DISTRO
+RUN sudo useradd -m -d /home/docker -s /bin/bash docker
+RUN sudo sh -c 'echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+USER docker
+WORKDIR /home/docker
+ENV USER docker
+ENV HOME /home/docker
+ENV DEBIAN_FRONTEND noninteractive
+EOL
+fi
 rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "$(cat << EOL
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
+source \$HOME/.jenkinshrg/install/credential.sh
 source \$HOME/.jenkinshrg/scripts/env.sh
 source .jenkins.sh $FUNC $TEST
 EOL
@@ -1099,13 +1151,34 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
       <command>#!/bin/bash
 set -e
 if [ -v CONTAINER ]; then
+if [ "\$(sudo docker images -q base/$OS:$DISTRO)" = "" ]; then
+rm -fr docker
+git clone --depth 1 https://github.com/docker/docker.git
+cd docker/contrib
+sudo ./mkimage.sh -t base/$OS:$DISTRO debootstrap --verbose --variant=buildd --include=$INCLUDE --components=$COMPONENTS --arch=$ARCH $DISTRO $MIRROR
+cd ../..
+rm -fr docker
+fi
+if [ "\$(sudo docker images -q original/$OS:$DISTRO)" = "" ]; then
+cat &lt;&lt; EOL | sudo docker build -t original/$OS:$DISTRO -
+FROM base/$OS:$DISTRO
+RUN sudo useradd -m -d /home/docker -s /bin/bash docker
+RUN sudo sh -c 'echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+USER docker
+WORKDIR /home/docker
+ENV USER docker
+ENV HOME /home/docker
+ENV DEBIAN_FRONTEND noninteractive
+EOL
+fi
 rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "$(cat << EOL
+sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
+source \$HOME/.jenkinshrg/install/credential.sh
 source \$HOME/.jenkinshrg/scripts/env.sh
 source .jenkins.sh
 EOL
