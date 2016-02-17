@@ -475,11 +475,11 @@ rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -e DISPLAY=\$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=\$JOB_NAME -e WORKSPACE=/home/docker/workspace -v \$WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v \$HOME/.jenkinshrg:/home/docker/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
-source \$HOME/.jenkinshrg/install/credential.sh
-source \$HOME/.jenkinshrg/scripts/env.sh
+source /home/docker/.jenkinshrg/install/credential.sh
+source /home/docker/.jenkinshrg/scripts/env.sh
 source .jenkins.sh $FUNC $TEST
 EOL
 )"
@@ -827,11 +827,11 @@ rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -e DISPLAY=\$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=\$JOB_NAME -e WORKSPACE=/home/docker/workspace -v \$WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v \$HOME/.jenkinshrg:/home/docker/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
-source \$HOME/.jenkinshrg/install/credential.sh
-source \$HOME/.jenkinshrg/scripts/env.sh
+source /home/docker/.jenkinshrg/install/credential.sh
+source /home/docker/.jenkinshrg/scripts/env.sh
 source .jenkins.sh $FUNC $TEST
 EOL
 )"
@@ -1175,11 +1175,11 @@ rm -fr src
 rm -fr openrtp
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
-sudo docker run --rm -t -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=$JOB_NAME -e WORKSPACE=/home/docker/workspace -v $WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v $HOME/Documents:/home/docker/Documents --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -e DISPLAY=\$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=\$JOB_NAME -e WORKSPACE=/home/docker/workspace -v \$WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v \$HOME/.jenkinshrg:/home/docker/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
-source \$HOME/.jenkinshrg/install/credential.sh
-source \$HOME/.jenkinshrg/scripts/env.sh
+source /home/docker/.jenkinshrg/install/credential.sh
+source /home/docker/.jenkinshrg/scripts/env.sh
 source .jenkins.sh
 EOL
 )"
