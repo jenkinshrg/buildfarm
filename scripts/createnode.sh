@@ -4,13 +4,13 @@ NAME=${1}
 RFS=${2:-$HOME}
 URL=${3:-http://localhost:8080}
 
-wget -q ${URL}/jnlpJars/jenkins-cli.jar
-cat << EOL | java -jar jenkins-cli.jar -s ${URL} create-node ${NAME}
+wget -q $URL/jnlpJars/jenkins-cli.jar
+cat << EOL | java -jar jenkins-cli.jar -s $URL create-node $NAME
 <?xml version="1.0" encoding="UTF-8"?>
 <slave>
-  <name>${NAME}</name>
+  <name>$NAME</name>
   <description></description>
-  <remoteFS>${RFS}</remoteFS>
+  <remoteFS>$RFS</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy\$Always"/>
