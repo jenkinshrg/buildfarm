@@ -20,32 +20,32 @@ cat << EOL | sudo tee /var/lib/jenkins/config.xml
 </hudson>
 EOL
 
-cat << EOL | sudo tee -a /var/cache/jenkins/war/css/style.css
-pre {
-    background-color: #2a2a2a;
-    color: #f1f1f1;
-}
-EOL
+# cat << EOL | sudo tee -a /var/cache/jenkins/war/css/style.css
+# pre {
+#     background-color: #2a2a2a;
+#     color: #f1f1f1;
+# }
+# EOL
 
 wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin multiple-scms
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin clone-workspace-scm
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin clone-workspace-scm
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin embeddable-build-status
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor 
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin parameterized-trigger
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cmakebuilder
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin warnings
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin parameterized-trigger
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cmakebuilder
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin warnings
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cobertura
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cccc
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cccc
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin cppcheck
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin valgrind
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin htmlpublisher
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin htmlpublisher
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin xunit
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin plot
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin email-ext
-#java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin join
+# java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin join
 rm jenkins-cli.jar
 
 sudo service jenkins restart
