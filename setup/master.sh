@@ -6,6 +6,8 @@ sudo apt-get update
 sudo apt-get -y install jenkins
 sleep 30
 
+sudo sh -c 'echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+
 cat << EOL | sudo tee /var/lib/jenkins/config.xml
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>

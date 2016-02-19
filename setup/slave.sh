@@ -1,8 +1,8 @@
 #!/bin/bash
 
 sudo useradd -s /bin/bash -m jenkins-slave
-sudo su -l jenkins-slave -c "wget -q http://localhost:8080/jnlpJars/slave.jar"
 sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+sudo su -l jenkins-slave -c "wget -q http://localhost:8080/jnlpJars/slave.jar"
 
 sudo cp etc/default/jenkins-slave /etc/default
 sudo cp etc/init.d/jenkins-slave /etc/init.d
