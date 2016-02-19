@@ -1,9 +1,18 @@
 #!/bin/bash
 
-NAME=${1:-slave}
-URL=${2:-http://localhost:8080}
+sudo useradd -s /bin/bash -m jenkins-slave
+sudo su -l jenkins-slave -c "wget -q http://localhost:8080/jnlpJars/slave.jar"
+sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
-wget -q $URL/jnlpJars/slave.jar
-java -jar slave.jar -jnlpUrl $URL/computer/$NAME/slave-agent.jnlp &
-sleep 1
-rm slave.jar
+sudo cp etc/default/jenkins-slave /etc/default
+sudo cp etc/init.d/jenkins-slave /etc/init.d
+
+sudo mkdir -p /var/log/jenkins-slave
+sudo chown -R jenkins-slave.jenkins-slave /var/log/jenkins-slave
+
+#sudo apt-get -y install sysv-rc-conf
+#sudo chkconfig jenkins-slave on
+sudo update-rc.d jenkins-slave defaults
+#sudo insserv jenkins-slave
+
+sudo service jenkins-slave start
