@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sudo apt-get -y install openjdk-7-jdk
+
+sudo apt-get -y install git
+
 sudo useradd -s /bin/bash -m jenkins-slave
 sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 sudo su -l jenkins-slave -c "wget -q http://localhost:8080/jnlpJars/slave.jar"

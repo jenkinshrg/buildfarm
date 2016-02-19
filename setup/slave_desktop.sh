@@ -3,6 +3,10 @@
 NAME=${1:-slave_desktop}
 URL=${2:-http://localhost:8080}
 
+sudo apt-get -y install openjdk-7-jdk
+
+sudo apt-get -y install git
+
 sudo sh -c 'echo "'$USER' ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
 wget -q -O $HOME/slave.jar $URL/jnlpJars/slave.jar
