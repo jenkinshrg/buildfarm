@@ -1,7 +1,8 @@
 #!/bin/bash
 
-NAME=${1:-$(hostname)}
-URL=${2:-http://jenkinshrg.a01.aist.go.jp}
+NAME=${1:-slave}
+
+URL=http://jenkinshrg.a01.aist.go.jp
 
 sudo apt-get -y install openjdk-7-jdk
 
