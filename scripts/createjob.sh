@@ -469,7 +469,7 @@ if [ "\$(sudo docker images -q base/$OS:$DISTRO)" = "" ]; then
 rm -fr docker
 git clone --depth 1 https://github.com/docker/docker.git
 cd docker/contrib
-sudo ./mkimage.sh -t base/$OS:$DISTRO debootstrap --verbose --variant=buildd --include=$INCLUDE --components=$COMPONENTS --arch=$ARCH $DISTRO $MIRROR
+sudo ./mkimage.sh -t base/$OS:$DISTRO debootstrap --variant=buildd --include=$INCLUDE --components=$COMPONENTS --arch=$ARCH $DISTRO $MIRROR
 cd ../..
 rm -fr docker
 fi
