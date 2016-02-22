@@ -1,16 +1,16 @@
 #!/bin/bash
 
 if [ $# -lt 7 ] ;  then
-  echo "Usage:" $0 "jobname node os distro arch trigger script [script_args]"
+  echo "Usage:" $0 "jobname template node os distro arch script [script_args]"
   exit
 fi
 
 NAME=${1:-debug}
-NODE=${2:-slave}
-OS=${3:-none}
-DISTRO=${4:-none}
-ARCH=${5:-none}
-TRIGGER=${6:-none}
+TEMPLATE=${2:-none}
+NODE=${3:-slave}
+OS=${4:-none}
+DISTRO=${5:-none}
+ARCH=${6:-none}
 SCRIPT=$7
 
 cnt=1
@@ -40,7 +40,7 @@ fi
 
 wget -q $URL/jnlpJars/jenkins-cli.jar
 
-if [ "$TRIGGER" = "scm" ]; then
+if [ "$TEMPLATE" = "scm" ]; then
 cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
@@ -313,119 +313,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
   </buildWrappers>
 </project>
 EOF
-elif [ "$TRIGGER" = "scmsvn" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description></description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <jenkins.model.BuildDiscarderProperty>
-      <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>2</daysToKeep>
-        <numToKeep>-1</numToKeep>
-        <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>-1</artifactNumToKeep>
-      </strategy>
-    </jenkins.model.BuildDiscarderProperty>
-  </properties>
-  <scm class="hudson.scm.SubversionSCM" plugin="subversion@1.54">
-    <locations>
-      <hudson.scm.SubversionSCM_-ModuleLocation>
-        <remote>https://atom.a01.aist.go.jp/svn/HRP2/trunk</remote>
-        <local>.</local>
-        <depthOption>infinity</depthOption>
-        <ignoreExternalsOption>false</ignoreExternalsOption>
-      </hudson.scm.SubversionSCM_-ModuleLocation>
-    </locations>
-    <excludedRegions></excludedRegions>
-    <includedRegions></includedRegions>
-    <excludedUsers></excludedUsers>
-    <excludedRevprop></excludedRevprop>
-    <excludedCommitMessages></excludedCommitMessages>
-    <workspaceUpdater class="hudson.scm.subversion.UpdateUpdater"/>
-    <ignoreDirPropChanges>false</ignoreDirPropChanges>
-    <filterChangelog>false</filterChangelog>
-  </scm>
-  <assignedNode>$NODE</assignedNode>
-  <canRoam>false</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders/>
-  <publishers/>
-  <buildWrappers>
-    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
-      <colorMapName>xterm</colorMapName>
-    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.4"/>
-  </buildWrappers>
-</project>
-EOF
-elif [ "$TRIGGER" = "scmgit" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
-<?xml version='1.0' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description></description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <jenkins.model.BuildDiscarderProperty>
-      <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>2</daysToKeep>
-        <numToKeep>-1</numToKeep>
-        <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>-1</artifactNumToKeep>
-      </strategy>
-    </jenkins.model.BuildDiscarderProperty>
-  </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.1">
-    <configVersion>2</configVersion>
-    <userRemoteConfigs>
-      <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/fkanehiro/openhrp3.git</url>
-      </hudson.plugins.git.UserRemoteConfig>
-    </userRemoteConfigs>
-    <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>*/master</name>
-      </hudson.plugins.git.BranchSpec>
-    </branches>
-    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
-    <extensions/>
-  </scm>
-  <assignedNode>$NODE</assignedNode>
-  <canRoam>false</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.SCMTrigger>
-      <spec>* * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders/>
-  <publishers/>
-  <buildWrappers>
-    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.2">
-      <colorMapName>xterm</colorMapName>
-    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7.4"/>
-  </buildWrappers>
-</project>
-EOF
-elif [ "$TRIGGER" = "upstream" ]; then
+elif [ "$TEMPLATE" = "upstream" ]; then
 cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
@@ -767,7 +655,7 @@ EOL
   </buildWrappers>
 </project>
 EOF
-elif [ "$TRIGGER" = "periodic" ]; then
+elif [ "$TEMPLATE" = "periodic" ]; then
 cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>

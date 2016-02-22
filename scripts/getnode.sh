@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $# -lt 1 ] ;  then
+  echo "Usage:" $0 "nodename"
+  exit
+fi
+
 NAME=${1}
 
 URL=http://jenkinshrg.a01.aist.go.jp

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+NAME=${1:-slave}
+URL=${2:-http://jenkinshrg.a01.aist.go.jp}
+
 sudo apt-get -y install openjdk-7-jdk
 
 sudo apt-get -y install git
@@ -8,9 +11,9 @@ sudo apt-get -y install daemon
 
 sudo useradd -s /bin/bash -m jenkins-slave
 sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
-sudo su -l jenkins-slave -c "wget -q http://192.168.33.10:8080/jnlpJars/slave.jar"
+sudo su -l jenkins-slave -c "wget -q "$URL"/jnlpJars/slave.jar"
 
-cat << \EOL | sudo tee /etc/default/jenkins-slave
+cat << EOL | sudo tee /etc/default/jenkins-slave
 # defaults for jenkins continuous integration server
 
 # pulled in from the init script; makes things easier.
@@ -24,17 +27,17 @@ JAVA_ARGS=""  # Allow graphs etc. to work even when an X server is present
 #JAVA_ARGS="-Xmx256m"
 #JAVA_ARGS="-Djava.net.preferIPv4Stack=true" # make jenkins listen on IPv4 address
 
-PIDFILE=/var/run/$NAME/$NAME.pid
+PIDFILE=/var/run/\$NAME/\$NAME.pid
 
 # user and group to be invoked as (default to jenkins)
-JENKINS_USER=$NAME
-JENKINS_GROUP=$NAME
+JENKINS_USER=\$NAME
+JENKINS_GROUP=\$NAME
 
 # location of the jenkins war file
-JENKINS_WAR=/home/$NAME/slave.jar
+JENKINS_WAR=/home/\$NAME/slave.jar
 
 # jenkins home location
-JENKINS_HOME=/home/$NAME
+JENKINS_HOME=/home/\$NAME
 
 # set this to false if you don't want Hudson to run by itself
 # in this set up, you are expected to provide a servlet container
@@ -42,7 +45,7 @@ JENKINS_HOME=/home/$NAME
 RUN_STANDALONE=true
 
 # log location.  this may be a syslog facility.priority
-JENKINS_LOG=/var/log/$NAME/$NAME.log
+JENKINS_LOG=/var/log/\$NAME/\$NAME.log
 #JENKINS_LOG=daemon.info
 
 # OS LIMITS SETUP
@@ -57,7 +60,7 @@ MAXOPENFILES=8192
 #   might consider benefitial, especially if Jenkins runs in a box that's used for multiple purposes.
 #   Beware that 027 permission would interfere with sudo scripts that run on the master (JENKINS-25065.)
 #
-#   Note also that the particularly sensitive part of $JENKINS_HOME (such as credentials) are always
+#   Note also that the particularly sensitive part of \$JENKINS_HOME (such as credentials) are always
 #   written without 'others' access. So the umask values only affect job configuration, build records,
 #   that sort of things.
 #
@@ -73,19 +76,19 @@ HTTP_PORT=8080
 AJP_PORT=-1
 
 # servlet context, important if you want to use apache proxying  
-PREFIX=/$NAME
+PREFIX=/\$NAME
 
 # arguments to pass to jenkins.
-# --javahome=$JAVA_HOME
-# --httpPort=$HTTP_PORT (default 8080; disable with -1)
-# --httpsPort=$HTTP_PORT
-# --ajp13Port=$AJP_PORT
-# --argumentsRealm.passwd.$ADMIN_USER=[password]
-# --argumentsRealm.roles.$ADMIN_USER=admin
+# --javahome=\$JAVA_HOME
+# --httpPort=\$HTTP_PORT (default 8080; disable with -1)
+# --httpsPort=\$HTTP_PORT
+# --ajp13Port=\$AJP_PORT
+# --argumentsRealm.passwd.\$ADMIN_USER=[password]
+# --argumentsRealm.roles.\$ADMIN_USER=admin
 # --webroot=~/.jenkins/war
-# --prefix=$PREFIX
+# --prefix=\$PREFIX
 
-JENKINS_ARGS="-jnlpUrl http://192.168.33.10:8080/computer/slave/slave-agent.jnlp"
+JENKINS_ARGS="-jnlpUrl $URL/computer/$NAME/slave-agent.jnlp"
 EOL
 
 cat << \EOL | sudo tee /etc/init.d/jenkins-slave
