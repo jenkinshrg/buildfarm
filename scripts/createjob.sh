@@ -477,7 +477,7 @@ fi
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
-sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE -v \$HOME/.jenkinshrg:/root/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE -v \$HOME/.jenkinshrg:/root/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 base/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 export WORKSPACE=$WORKSPACE
 export JOB_NAME=$JOB_NAME
