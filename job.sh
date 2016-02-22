@@ -6,4 +6,4 @@
 ./scripts/createjob.sh drcutil-task-terrain     150.29.145.169 none   none   none  periodic .jenkinshrg.sh task terrain
 ./scripts/createjob.sh drcutil-task-valve       150.29.145.169 none   none   none  periodic .jenkinshrg.sh task valve
 ./scripts/createjob.sh drcutil-task-wall        150.29.145.169 none   none   none  periodic .jenkinshrg.sh task wall
-./scripts/createjob.sh report                   150.29.145.15  none   none   none  none     .jenkinshrg.sh
+./scripts/createjob.sh drcutil-upload           150.29.145.15  none   none   none  none     report.sh
