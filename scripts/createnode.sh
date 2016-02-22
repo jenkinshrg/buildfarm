@@ -1,8 +1,8 @@
 #!/bin/bash
 
 NAME=${1}
-RFS=${2:-$HOME}
-URL=${3:-http://localhost:8080}
+
+URL=http://jenkinshrg.a01.aist.go.jp
 
 wget -q $URL/jnlpJars/jenkins-cli.jar
 cat << EOL | java -jar jenkins-cli.jar -s $URL create-node $NAME
@@ -10,7 +10,7 @@ cat << EOL | java -jar jenkins-cli.jar -s $URL create-node $NAME
 <slave>
   <name>$NAME</name>
   <description></description>
-  <remoteFS>$RFS</remoteFS>
+  <remoteFS>$HOME</remoteFS>
   <numExecutors>1</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy\$Always"/>
