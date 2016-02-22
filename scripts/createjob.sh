@@ -458,6 +458,7 @@ sudo ./mkimage.sh -t base/$OS:$DISTRO debootstrap --verbose --variant=buildd --i
 cd ../..
 rm -fr docker
 fi
+
 if [ "\$(sudo docker images -q original/$OS:$DISTRO)" = "" ]; then
 cat &lt;&lt; EOL | sudo docker build -t original/$OS:$DISTRO -
 FROM base/$OS:$DISTRO
@@ -470,8 +471,10 @@ ENV HOME /home/docker
 ENV DEBIAN_FRONTEND noninteractive
 EOL
 fi
+
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
+
 sudo docker run --rm -t -e DISPLAY=\$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=\$JOB_NAME -e WORKSPACE=/home/docker/workspace -e BUILD_URL=\$BUILD_URL -v \$WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v \$HOME/.jenkinshrg:/home/docker/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 cd $REPO_DIR
