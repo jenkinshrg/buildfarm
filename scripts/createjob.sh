@@ -1,17 +1,18 @@
 #!/bin/bash
 
 NAME=${1:-debug}
-REPO_URL=${2:-https://github.com/jenkinshrg/drcutil.git}
-REPO_DIR=${3:-drcutil}
-BRANCH=${4:-jenkins}
-NODE=${5:-slave}
-OS=${6:-none}
-DISTRO=${7:-none}
-ARCH=${8:-none}
-TRIGGER=${9:-none}
-FUNC=${10:-all}
-TEST=${11:-all}
-URL=${12:-http://jenkinshrg.a01.aist.go.jp}
+NODE=${2:-slave}
+OS=${3:-none}
+DISTRO=${4:-none}
+ARCH=${5:-none}
+TRIGGER=${6:-none}
+FUNC=${7:-all}
+TEST=${8:-all}
+URL=${9:-http://jenkinshrg.a01.aist.go.jp}
+
+REPO_URL=https://github.com/jenkinshrg/drcutil.git
+REPO_DIR=drcutil
+BRANCH=jenkins
 
 if [ "$OS" = "debian" ]; then
 MIRROR=http://ftp.jp.debian.org/debian/
