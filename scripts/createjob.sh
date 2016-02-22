@@ -1,18 +1,32 @@
 #!/bin/bash
 
+if [ $# -lt 7 ] ;  then
+  echo "Usage:" $0 "jobname node os distro arch trigger script [script_args]"
+  exit
+fi
+
 NAME=${1:-debug}
 NODE=${2:-slave}
 OS=${3:-none}
 DISTRO=${4:-none}
 ARCH=${5:-none}
 TRIGGER=${6:-none}
-FUNC=${7:-all}
-TEST=${8:-all}
-URL=${9:-http://jenkinshrg.a01.aist.go.jp}
+SCRIPT=$7
+
+cnt=1
+SCRIPT_ARGS=""
+for i in $*
+do
+  if [ $cnt -gt 7 ] ; then
+    SCRIPT_ARGS=`echo $SCRIPT_ARGS $i`
+  fi
+  cnt=$(($cnt+1))
+done
 
 REPO_URL=https://github.com/jenkinshrg/drcutil.git
 REPO_DIR=drcutil
 BRANCH=jenkins
+URL=http://jenkinshrg.a01.aist.go.jp
 
 if [ "$OS" = "debian" ]; then
 MIRROR=http://ftp.jp.debian.org/debian/
@@ -481,7 +495,7 @@ set -e
 cd $REPO_DIR
 source /home/docker/.jenkinshrg/install/credential.sh
 source /home/docker/.jenkinshrg/scripts/env.sh
-source .jenkins.sh $FUNC $TEST
+source $SCRIPT $SCRIPT_ARGS
 EOL
 )"</command>
     </hudson.tasks.Shell>
@@ -800,7 +814,7 @@ rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 cd $REPO_DIR
 source \$HOME/.jenkinshrg/scripts/env.sh
-source .jenkins.sh $FUNC $TEST</command>
+source $SCRIPT $SCRIPT_ARGS</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -1112,7 +1126,7 @@ set -e
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 cd $REPO_DIR
-source .jenkins.sh</command>
+source $SCRIPT $SCRIPT_ARGS</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
