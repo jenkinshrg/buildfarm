@@ -474,27 +474,17 @@ cd ../..
 rm -fr docker
 fi
 
-if [ "\$(sudo docker images -q original/$OS:$DISTRO)" = "" ]; then
-cat &lt;&lt; EOL | sudo docker build -t original/$OS:$DISTRO -
-FROM base/$OS:$DISTRO
-RUN sudo useradd -m -d /home/docker -s /bin/bash docker
-RUN sudo sh -c 'echo "docker ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
-USER docker
-WORKDIR /home/docker
-ENV USER docker
-ENV HOME /home/docker
-ENV DEBIAN_FRONTEND noninteractive
-EOL
-fi
-
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
-sudo docker run --rm -t -e DISPLAY=\$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -e JOB_NAME=\$JOB_NAME -e WORKSPACE=/home/docker/workspace -e BUILD_URL=\$BUILD_URL -v \$WORKSPACE:/home/docker/workspace -w /home/docker/workspace -v \$HOME/.jenkinshrg:/home/docker/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE -v \$HOME/.jenkinshrg:/root/.jenkinshrg --dns=150.29.246.19 --dns=150.29.254.121 original/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
-cd $REPO_DIR
-source /home/docker/.jenkinshrg/install/credential.sh
-source /home/docker/.jenkinshrg/scripts/env.sh
+export WORKSPACE=$WORKSPACE
+export JOB_NAME=$JOB_NAME
+export BUILD_URL=$BUILD_URL
+source /root/.jenkinshrg/install/credential.sh
+source /root/.jenkinshrg/scripts/env.sh
+cd $WORKSPACE/$REPO_DIR
 source $SCRIPT $SCRIPT_ARGS
 EOL
 )"</command>
