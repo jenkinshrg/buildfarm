@@ -367,31 +367,31 @@ git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
 sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE base/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
-export WORKSPACE=$WORKSPACE
-export JOB_NAME=$JOB_NAME
-export BUILD_URL=$BUILD_URL
-if [ -f $HOME/.netrc ]; then
-  cp -a $HOME/.netrc /root
+export WORKSPACE=\$WORKSPACE
+export JOB_NAME=\$JOB_NAME
+export BUILD_URL=\$BUILD_URL
+if [ -f \$HOME/.netrc ]; then
+  cp -a \$HOME/.netrc /root
   chown root.root /root/.netrc
 fi
-if [ -d $HOME/.ssh ]; then
-  cp -a $HOME/.ssh /root
+if [ -d \$HOME/.ssh ]; then
+  cp -a \$HOME/.ssh /root
   chown -R root.root /root/.ssh
 fi
-if [ -d $HOME/.subversion ]; then
-  cp -a $HOME/.subversion /root
+if [ -d \$HOME/.subversion ]; then
+  cp -a \$HOME/.subversion /root
   chown -R root.root /root/.subversion
 fi
-if [ -f $HOME/.git-credentials ]; then
-  cp -a $HOME/.git-credentials /root
+if [ -f \$HOME/.git-credentials ]; then
+  cp -a \$HOME/.git-credentials /root
   chown root.root /root/.git-credentials
 fi
-if [ -f $HOME/.gitconfig ]; then
-  cp -a $HOME/.gitconfig /root
+if [ -f \$HOME/.gitconfig ]; then
+  cp -a \$HOME/.gitconfig /root
   chown root.root /root/.gitconfig
 fi
-if [ -f $HOME/.jenkinshrg ]; then
-  cp -a $HOME/.jenkinshrg /root
+if [ -f \$HOME/.jenkinshrg ]; then
+  cp -a \$HOME/.jenkinshrg /root
   chown -R root.root /root/.jenkinshrg
 fi
 source /root/.jenkinshrg/env.sh
