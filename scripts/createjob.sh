@@ -352,7 +352,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-set -e
+set -xe
 if [ "\$(sudo docker images -q base/$OS:$DISTRO)" = "" ]; then
 rm -fr docker
 git clone --depth 1 https://github.com/docker/docker.git
@@ -366,7 +366,7 @@ rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
 sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE base/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
-set -e
+set -xe
 export WORKSPACE=\$WORKSPACE
 export JOB_NAME=\$JOB_NAME
 export BUILD_URL=\$BUILD_URL
@@ -710,7 +710,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-set -e
+set -xe
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 cd $REPO_DIR
@@ -1023,7 +1023,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-set -e
+set -xe
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 cd $REPO_DIR
