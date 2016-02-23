@@ -365,14 +365,14 @@ fi
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
-sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE -v \$HOME/.jenkinshrg:/root/.jenkinshrg base/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE base/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
 set -e
 export WORKSPACE=$WORKSPACE
 export JOB_NAME=$JOB_NAME
 export BUILD_URL=$BUILD_URL
 if [ -f $HOME/.netrc ]; then
   cp -a $HOME/.netrc /root
-  chown -R root.root /root/.netrc
+  chown root.root /root/.netrc
 fi
 if [ -d $HOME/.ssh ]; then
   cp -a $HOME/.ssh /root
@@ -384,9 +384,17 @@ if [ -d $HOME/.subversion ]; then
 fi
 if [ -f $HOME/.git-credentials ]; then
   cp -a $HOME/.git-credentials /root
-  chown -R root.root /root/.git-credentials
+  chown root.root /root/.git-credentials
 fi
-source /root/.jenkinshrg/scripts/env.sh
+if [ -f $HOME/.gitconfig ]; then
+  cp -a $HOME/.gitconfig /root
+  chown root.root /root/.gitconfig
+fi
+if [ -f $HOME/.jenkinshrg ]; then
+  cp -a $HOME/.jenkinshrg /root
+  chown -R root.root /root/.jenkinshrg
+fi
+source /root/.jenkinshrg/env.sh
 cd $WORKSPACE/$REPO_DIR
 source $SCRIPT $SCRIPT_ARGS
 EOL
@@ -706,7 +714,7 @@ set -e
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 cd $REPO_DIR
-source \$HOME/.jenkinshrg/scripts/env.sh
+source \$HOME/.jenkinshrg/env.sh
 source $SCRIPT $SCRIPT_ARGS</command>
     </hudson.tasks.Shell>
   </builders>
