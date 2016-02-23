@@ -370,7 +370,22 @@ set -e
 export WORKSPACE=$WORKSPACE
 export JOB_NAME=$JOB_NAME
 export BUILD_URL=$BUILD_URL
-source /root/.jenkinshrg/install/credential.sh
+if [ -f $HOME/.netrc ]; then
+  cp -a $HOME/.netrc /root
+  chown -R root.root /root/.netrc
+fi
+if [ -d $HOME/.ssh ]; then
+  cp -a $HOME/.ssh /root
+  chown -R root.root /root/.ssh
+fi
+if [ -d $HOME/.subversion ]; then
+  cp -a $HOME/.subversion /root
+  chown -R root.root /root/.subversion
+fi
+if [ -f $HOME/.git-credentials ]; then
+  cp -a $HOME/.git-credentials /root
+  chown -R root.root /root/.git-credentials
+fi
 source /root/.jenkinshrg/scripts/env.sh
 cd $WORKSPACE/$REPO_DIR
 source $SCRIPT $SCRIPT_ARGS
