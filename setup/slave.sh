@@ -11,6 +11,7 @@ sudo apt-get -y install daemon
 
 sudo useradd -s /bin/bash -m jenkins-slave
 sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+
 sudo su -l jenkins-slave -c "wget -q "$URL"/jnlpJars/slave.jar"
 
 cat << EOL | sudo tee /etc/default/jenkins-slave
