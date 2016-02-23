@@ -395,7 +395,7 @@ if [ -d \$HOME/.jenkinshrg ]; then
   chown -R root.root /root/.jenkinshrg
 fi
 source /root/.jenkinshrg/env.sh
-cd $WORKSPACE/$REPO_DIR
+cd \$WORKSPACE/$REPO_DIR
 source $SCRIPT $SCRIPT_ARGS
 EOL
 )"</command>
