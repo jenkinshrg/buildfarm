@@ -390,7 +390,7 @@ if [ -f \$HOME/.gitconfig ]; then
   cp -a \$HOME/.gitconfig /root
   chown root.root /root/.gitconfig
 fi
-if [ -f \$HOME/.jenkinshrg ]; then
+if [ -d \$HOME/.jenkinshrg ]; then
   cp -a \$HOME/.jenkinshrg /root
   chown -R root.root /root/.jenkinshrg
 fi
