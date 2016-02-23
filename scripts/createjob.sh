@@ -5,12 +5,12 @@ if [ $# -lt 7 ] ;  then
   exit
 fi
 
-NAME=${1:-debug}
-TEMPLATE=${2:-none}
-NODE=${3:-slave}
-OS=${4:-none}
-DISTRO=${5:-none}
-ARCH=${6:-none}
+NAME=$1
+TEMPLATE=$2
+NODE=$3
+OS=$4
+DISTRO=$5
+ARCH=$6
 SCRIPT=$7
 
 cnt=1

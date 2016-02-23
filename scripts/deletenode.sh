@@ -5,7 +5,7 @@ if [ $# -lt 1 ] ;  then
   exit
 fi
 
-NAME=${1}
+NAME=$1
 
 URL=http://jenkinshrg.a01.aist.go.jp
 

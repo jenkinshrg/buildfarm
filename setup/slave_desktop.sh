@@ -1,6 +1,11 @@
 #!/bin/bash
 
-NAME=${1:-slave}
+if [ $# -lt 1 ] ;  then
+  echo "Usage:" $0 "nodename [url]"
+  exit
+fi
+
+NAME=$1
 URL=${2:-http://jenkinshrg.a01.aist.go.jp}
 
 sudo apt-get -y install openjdk-7-jdk
