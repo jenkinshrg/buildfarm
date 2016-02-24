@@ -5,6 +5,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.synced_folder "~/.jenkinshrg", "/home/vagrant/.jenkinshrg"
   config.vm.provision "shell", path: "setup/bootstrap.sh", privileged: false
+  config.vm.provision "shell", path: "setup/common.sh", privileged: false
   config.vm.define "master", primary: true do |server|
     server.vm.network "forwarded_port", guest: 8080, host: 8080
     server.vm.network "forwarded_port", guest: 9000, host: 9000
