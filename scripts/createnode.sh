@@ -6,6 +6,7 @@ if [ $# -lt 1 ] ;  then
 fi
 
 NAME=$1
+NUMEXECUTORS=$2
 
 URL=http://jenkinshrg.a01.aist.go.jp
 
@@ -16,7 +17,7 @@ cat << EOL | java -jar jenkins-cli.jar -s $URL create-node $NAME
   <name>$NAME</name>
   <description></description>
   <remoteFS>$HOME</remoteFS>
-  <numExecutors>1</numExecutors>
+  <numExecutors>$NUMEXECUTORS</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy\$Always"/>
   <launcher class="hudson.slaves.JNLPLauncher"/>
