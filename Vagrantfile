@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
-  config.vm.synced_folder "~/.jenkinshrg", "/home/vagrant/.jenkinshrg"
+  config.vm.synced_folder "~", "/home/anonymous"
   config.vm.provision "shell", path: "setup/bootstrap.sh", privileged: false
   config.vm.provision "shell", path: "setup/common.sh", privileged: false
   config.vm.define "master", autostart: true, primary: true do |server|
@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
       vb.cpus = "1"
     end
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
+    server.vm.provision "shell", path: "setup/credentials.sh", privileged: false
   end
   config.vm.define "slave", autostart: false do |server|
     server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
@@ -23,5 +24,6 @@ Vagrant.configure(2) do |config|
       vb.cpus = "4"
     end
     server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "setup/credentials.sh", privileged: false
   end
 end
