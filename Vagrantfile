@@ -22,7 +22,6 @@ Vagrant.configure(2) do |config|
       vb.memory = "4096"
       vb.cpus = "4"
     end
-    server.vm.provision "shell", path: "setup/docker.sh", privileged: false
     server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
   end
 end

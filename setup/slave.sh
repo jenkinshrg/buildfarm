@@ -8,8 +8,6 @@ fi
 NAME=$1
 URL=${2:-http://jenkinshrg.a01.aist.go.jp}
 
-sudo apt-get -y install daemon
-
 sudo useradd -s /bin/bash -m jenkins-slave
 sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
@@ -375,9 +373,6 @@ sudo chmod 755 /etc/init.d/jenkins-slave
 sudo mkdir -p /var/log/jenkins-slave
 sudo chown -R jenkins-slave.jenkins-slave /var/log/jenkins-slave
 
-#sudo apt-get -y install sysv-rc-conf
-#sudo chkconfig jenkins-slave on
 sudo update-rc.d jenkins-slave defaults
-#sudo insserv jenkins-slave
 
 sudo service jenkins-slave start
