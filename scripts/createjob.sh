@@ -370,25 +370,17 @@ set -xe
 export WORKSPACE=\$WORKSPACE
 export JOB_NAME=\$JOB_NAME
 export BUILD_URL=\$BUILD_URL
-if [ -f \$HOME/.netrc ]; then
-  cp -a \$HOME/.netrc /root
-  chown root.root /root/.netrc
-fi
-if [ -d \$HOME/.ssh ]; then
-  cp -a \$HOME/.ssh /root
-  chown -R root.root /root/.ssh
-fi
-if [ -d \$HOME/.subversion ]; then
-  cp -a \$HOME/.subversion /root
-  chown -R root.root /root/.subversion
+if [ -f \$HOME/.gitconfig ]; then
+  cp -a \$HOME/.gitconfig /root
+  chown root.root /root/.gitconfig
 fi
 if [ -f \$HOME/.git-credentials ]; then
   cp -a \$HOME/.git-credentials /root
   chown root.root /root/.git-credentials
 fi
-if [ -f \$HOME/.gitconfig ]; then
-  cp -a \$HOME/.gitconfig /root
-  chown root.root /root/.gitconfig
+if [ -d \$HOME/.ssh ]; then
+  cp -a \$HOME/.ssh /root
+  chown -R root.root /root/.ssh
 fi
 if [ -d \$HOME/.jenkinshrg ]; then
   cp -a \$HOME/.jenkinshrg /root
