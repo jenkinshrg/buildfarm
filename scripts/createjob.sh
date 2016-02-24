@@ -298,7 +298,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
-      <spec>0 * * * *</spec>
+      <spec>H 0-4,9-23 * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
@@ -703,7 +703,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>0 * * * *</spec>
+      <spec>H 0-4,9-23 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
