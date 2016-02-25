@@ -9,7 +9,7 @@ NAME=$1
 NUMEXECUTORS=$2
 
 JENKINS_URL=${JENKINS_URL:-http://jenkinshrg.a01.aist.go.jp}
-REMOTEFS=${REMOTEFS:-$HOME}
+REMOTE_FS=${REMOTE_FS:-$HOME}
 
 wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
 cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
@@ -17,7 +17,7 @@ cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
 <slave>
   <name>$NAME</name>
   <description></description>
-  <remoteFS>$REMOTEFS</remoteFS>
+  <remoteFS>$REMOTE_FS</remoteFS>
   <numExecutors>$NUMEXECUTORS</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy\$Always"/>
