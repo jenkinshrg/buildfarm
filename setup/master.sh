@@ -39,3 +39,12 @@ sudo service jenkins restart
 sleep 30
 
 sudo sh -c 'echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
+
+sudo cp $HOME/.gitconfig /var/lib/jenkins
+sudo chown jenkins:jenkins /var/lib/jenkins/.gitconfig
+sudo cp $HOME/.git-credentials /var/lib/jenkins
+sudo chown jenkins:jenkins /var/lib/jenkins/.git-credentials
+sudo cp -r $HOME/.ssh /var/lib/jenkins
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.ssh
+sudo cp -r $HOME/.jenkinshrg /home/vagrant
+sudo chown -R jenkins:jenkins /var/lib/jenkins/.jenkinshrg
