@@ -1,12 +1,15 @@
 #!/bin/bash
 
 if [ $# -lt 2 ] ;  then
-  echo "Usage:" $0 "nodename"
+  echo "Usage:" $0 "nodename numexecutors"
   exit
 fi
 
 NAME=$1
 NUMEXECUTORS=$2
+
+JENKINS_URL=${JENKINS_URL:-http://jenkinshrg.a01.aist.go.jp}
+REMOTEFS=${REMOTEFS:-$HOME}
 
 wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
 cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
@@ -14,7 +17,7 @@ cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
 <slave>
   <name>$NAME</name>
   <description></description>
-  <remoteFS>$WORKSPACE</remoteFS>
+  <remoteFS>$REMOTEFS</remoteFS>
   <numExecutors>$NUMEXECUTORS</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy\$Always"/>

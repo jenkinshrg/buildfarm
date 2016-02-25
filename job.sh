@@ -1,5 +1,3 @@
-source config.sh
-
 ./scripts/createjob.sh drcutil                  scm      slave1 none   none   none  .jenkins.sh
 ./scripts/createjob.sh drcutil-build-32         upstream slave1 debian wheezy i386  .jenkins.sh build
 ./scripts/createjob.sh drcutil-build-64         upstream slave1 ubuntu trusty amd64 .jenkins.sh build

@@ -23,6 +23,8 @@ do
   cnt=$(($cnt+1))
 done
 
+JENKINS_URL=${JENKINS_URL:-http://jenkinshrg.a01.aist.go.jp}
+
 REPO_URL=https://github.com/jenkinshrg/drcutil.git
 REPO_DIR=drcutil
 BRANCH=jenkins
