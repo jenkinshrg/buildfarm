@@ -46,5 +46,5 @@ sudo cp $HOME/.git-credentials /var/lib/jenkins
 sudo chown jenkins:jenkins /var/lib/jenkins/.git-credentials
 sudo cp -r $HOME/.ssh /var/lib/jenkins
 sudo chown -R jenkins:jenkins /var/lib/jenkins/.ssh
-sudo cp -r $HOME/.jenkinshrg /home/vagrant
+sudo cp -r $HOME/.jenkinshrg /var/lib/jenkins
 sudo chown -R jenkins:jenkins /var/lib/jenkins/.jenkinshrg
