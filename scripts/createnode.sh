@@ -8,10 +8,8 @@ fi
 NAME=$1
 NUMEXECUTORS=$2
 
-URL=http://jenkinshrg.a01.aist.go.jp
-
-wget -q $URL/jnlpJars/jenkins-cli.jar
-cat << EOL | java -jar jenkins-cli.jar -s $URL create-node $NAME
+wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
+cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
 <?xml version="1.0" encoding="UTF-8"?>
 <slave>
   <name>$NAME</name>

@@ -27,7 +27,7 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/credentials.sh", privileged: false
   end
   config.vm.define "slave2", autostart: false do |server|
-    server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
+    server.vm.network "private_network", ip: "192.168.33.12", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "4096"
       vb.cpus = "4"
