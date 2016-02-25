@@ -17,13 +17,22 @@ Vagrant.configure(2) do |config|
     server.vm.provision "shell", path: "setup/master.sh", privileged: false
     server.vm.provision "shell", path: "setup/credentials.sh", privileged: false
   end
-  config.vm.define "slave", autostart: false do |server|
+  config.vm.define "slave1", autostart: false do |server|
     server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
     server.vm.provider "virtualbox" do |vb|
       vb.memory = "4096"
       vb.cpus = "4"
     end
-    server.vm.provision "shell", path: "setup/slave.sh", args: "slave http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "setup/slave.sh", args: "slave1 http://192.168.33.10:8080", privileged: false
+    server.vm.provision "shell", path: "setup/credentials.sh", privileged: false
+  end
+  config.vm.define "slave2", autostart: false do |server|
+    server.vm.network "private_network", ip: "192.168.33.11", virtualbox__intnet: "intnet0"
+    server.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+      vb.cpus = "4"
+    end
+    server.vm.provision "shell", path: "setup/slave.sh", args: "slave2 http://192.168.33.10:8080", privileged: false
     server.vm.provision "shell", path: "setup/credentials.sh", privileged: false
   end
 end
