@@ -8,8 +8,6 @@ fi
 NAME=$1
 URL=${2:-http://jenkinshrg.a01.aist.go.jp}
 
-sudo sh -c 'echo "'$USER' ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
-
 wget -q -O $HOME/slave.jar $URL/jnlpJars/slave.jar
 
 mkdir -p $HOME/.config/autostart
@@ -25,3 +23,5 @@ Comment=Start Jenkins Slave For Desktop Application
 EOL
 
 java -jar $HOME/slave.jar -jnlpUrl $URL/computer/$NAME/slave-agent.jnlp &
+
+sudo sh -c 'echo "'$USER' ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'

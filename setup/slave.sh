@@ -9,7 +9,6 @@ NAME=$1
 URL=${2:-http://jenkinshrg.a01.aist.go.jp}
 
 sudo useradd -s /bin/bash -m jenkins-slave
-sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 
 sudo su -l jenkins-slave -c "wget -q "$URL"/jnlpJars/slave.jar"
 
@@ -374,5 +373,6 @@ sudo mkdir -p /var/log/jenkins-slave
 sudo chown -R jenkins-slave.jenkins-slave /var/log/jenkins-slave
 
 sudo update-rc.d jenkins-slave defaults
-
 sudo service jenkins-slave start
+
+sudo sh -c 'echo "jenkins-slave ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'

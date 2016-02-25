@@ -6,8 +6,6 @@ sudo apt-get update
 sudo apt-get -y install jenkins
 sleep 30
 
-sudo sh -c 'echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
-
 cat << EOL | sudo tee /var/lib/jenkins/config.xml
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
@@ -15,13 +13,6 @@ cat << EOL | sudo tee /var/lib/jenkins/config.xml
   <slaveAgentPort>9000</slaveAgentPort>
 </hudson>
 EOL
-
-# cat << EOL | sudo tee -a /var/cache/jenkins/war/css/style.css
-# pre {
-#     background-color: #2a2a2a;
-#     color: #f1f1f1;
-# }
-# EOL
 
 wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
@@ -46,3 +37,5 @@ rm jenkins-cli.jar
 
 sudo service jenkins restart
 sleep 30
+
+sudo sh -c 'echo "jenkins ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'

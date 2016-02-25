@@ -5,3 +5,6 @@ sudo dpkg-reconfigure --frontend noninteractive tzdata
 
 sudo sed -i'~' -E "s@http://(..\.)?(archive|security)\.ubuntu\.com/ubuntu@http://ftp.jaist.ac.jp/pub/Linux/ubuntu@g" /etc/apt/sources.list
 sudo apt-get update
+sudo apt-get dist-upgrade
+
+sudo apt-get -y install git
