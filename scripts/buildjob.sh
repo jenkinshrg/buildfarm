@@ -7,8 +7,6 @@ fi
 
 NAME=$1
 
-URL=http://jenkinshrg.a01.aist.go.jp
-
-wget -q $URL/jnlpJars/jenkins-cli.jar
-java -jar jenkins-cli.jar -s $URL build $NAME
+wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
+java -jar jenkins-cli.jar -s $JENKINS_URL build $NAME
 rm jenkins-cli.jar

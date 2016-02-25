@@ -26,7 +26,6 @@ done
 REPO_URL=https://github.com/jenkinshrg/drcutil.git
 REPO_DIR=drcutil
 BRANCH=jenkins
-URL=http://jenkinshrg.a01.aist.go.jp
 
 if [ "$OS" = "debian" ]; then
 MIRROR=http://ftp.jp.debian.org/debian/
@@ -38,10 +37,10 @@ COMPONENTS=main,restricted,universe,multiverse
 INCLUDE=iproute,iputils-ping,sudo
 fi
 
-wget -q $URL/jnlpJars/jenkins-cli.jar
+wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
 
 if [ "$TEMPLATE" = "scm" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
+cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -314,7 +313,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
 </project>
 EOF
 elif [ "$TEMPLATE" = "upstream" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
+cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -671,7 +670,7 @@ EOL
 </project>
 EOF
 elif [ "$TEMPLATE" = "periodic" ]; then
-cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
+cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
@@ -988,7 +987,7 @@ source $SCRIPT $SCRIPT_ARGS</command>
 </project>
 EOF
 else
-cat << EOF | java -jar jenkins-cli.jar -s $URL create-job $NAME
+cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>

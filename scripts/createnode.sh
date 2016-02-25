@@ -14,7 +14,7 @@ cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
 <slave>
   <name>$NAME</name>
   <description></description>
-  <remoteFS>$HOME</remoteFS>
+  <remoteFS>$WORKSPACE</remoteFS>
   <numExecutors>$NUMEXECUTORS</numExecutors>
   <mode>EXCLUSIVE</mode>
   <retentionStrategy class="hudson.slaves.RetentionStrategy\$Always"/>

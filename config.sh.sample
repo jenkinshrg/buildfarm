@@ -1,1 +1,2 @@
 export JENKINS_URL=http://jenkinshrg.a01.aist.go.jp
+export WORKSPACE=$HOME
