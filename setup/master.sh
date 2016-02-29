@@ -14,6 +14,82 @@ cat << EOL | sudo tee /var/lib/jenkins/config.xml
 </hudson>
 EOL
 
+cat << EOL | sudo tee /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml
+<?xml version='1.0' encoding='UTF-8'?>
+<jenkins.model.JenkinsLocationConfiguration>
+  <adminAddress>jenkinshrg@gmail.com</adminAddress>
+</jenkins.model.JenkinsLocationConfiguration>
+EOL
+
+cat << \EOL | sudo tee /var/lib/jenkins/hudson.plugins.emailext.ExtendedEmailPublisher.xml
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.emailext.ExtendedEmailPublisherDescriptor plugin="email-ext@2.40.5">
+  <smtpAuthUsername>jenkinshrg@gmail.com</smtpAuthUsername>
+  <smtpAuthPassword>xklNqRpMJK+CWD43Y2uiu5Ik8h8YJ5mBfYoMojMvYTw=</smtpAuthPassword>
+  <smtpHost>smtp.gmail.com</smtpHost>
+  <useSsl>true</useSsl>
+  <charset>UTF-8</charset>
+  <defaultContentType>text/plain</defaultContentType>
+  <defaultSubject>[Jenkins] $PROJECT_NAME - # $BUILD_NUMBER - $BUILD_STATUS!</defaultSubject>
+  <defaultBody>### Test notification ###&#xd;
+&#xd;
+Check console output at $BUILD_URL to view the results.&#xd;
+Check report at http://jenkinshrg.github.io/ to view the results, when out of office.&#xd;
+&#xd;
+--- Name ---&#xd;
+&#xd;
+$PROJECT_NAME&#xd;
+&#xd;
+--- Number ---&#xd;
+&#xd;
+$BUILD_NUMBER&#xd;
+&#xd;
+--- Status ---&#xd;
+&#xd;
+$BUILD_STATUS&#xd;
+&#xd;
+--- Cause ---&#xd;
+&#xd;
+$CAUSE&#xd;
+&#xd;
+--- Failed Tests ---&#xd;
+&#xd;
+$FAILED_TESTS&#xd;
+&#xd;
+--- Changes ---&#xd;
+&#xd;
+${FILE,path=&quot;changes_email.txt&quot;}&#xd;
+&#xd;
+--- Artifacts ---&#xd;
+&#xd;
+${FILE,path=&quot;artifacts_email.txt&quot;}&#xd;
+&#xd;
+--- Artifacts (Google Drive) ---&#xd;
+&#xd;
+${FILE,path=&quot;uploads_email.txt&quot;}&#xd;
+&#xd;
+--- Build log ---&#xd;
+&#xd;
+$BUILD_LOG</defaultBody>
+  <defaultPresendScript></defaultPresendScript>
+  <defaultClasspath/>
+  <defaultTriggerIds>
+    <string>hudson.plugins.emailext.plugins.trigger.FailureTrigger</string>
+    <string>hudson.plugins.emailext.plugins.trigger.UnstableTrigger</string>
+  </defaultTriggerIds>
+  <maxAttachmentSize>-1</maxAttachmentSize>
+  <recipientList>jenkinshrg@gmail.com,hrg-notification-ml@aist.go.jp</recipientList>
+  <defaultReplyTo></defaultReplyTo>
+  <excludedCommitters></excludedCommitters>
+  <overrideGlobalSettings>true</overrideGlobalSettings>
+  <precedenceBulk>false</precedenceBulk>
+  <debugMode>false</debugMode>
+  <enableSecurity>false</enableSecurity>
+  <requireAdminForTemplateTesting>false</requireAdminForTemplateTesting>
+  <enableWatching>false</enableWatching>
+</hudson.plugins.emailext.ExtendedEmailPublisherDescriptor>
+EOL
+
 wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin multiple-scms
