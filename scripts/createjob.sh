@@ -51,8 +51,8 @@ cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>2</daysToKeep>
-        <numToKeep>-1</numToKeep>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>100</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
@@ -324,8 +324,8 @@ cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>2</daysToKeep>
-        <numToKeep>-1</numToKeep>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>100</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
@@ -354,7 +354,7 @@ cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 set -xe
-if [ "\$(sudo docker images -q base/$OS:$DISTRO)" = "" ]; then
+if [ &quot;\$(sudo docker images -q base/$OS:$DISTRO)&quot; = &quot;&quot; ]; then
 rm -fr docker
 git clone --depth 1 https://github.com/docker/docker.git
 cd docker/contrib
@@ -366,7 +366,7 @@ fi
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
-sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE base/$OS:$DISTRO /bin/bash -c "\$(cat &lt;&lt; EOL
+sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE base/$OS:$DISTRO /bin/bash -c &quot;\$(cat &lt;&lt; EOL
 set -xe
 export WORKSPACE=\$WORKSPACE
 export JOB_NAME=\$JOB_NAME
@@ -391,12 +391,12 @@ source /root/.jenkinshrg/env.sh
 cd \$WORKSPACE/$REPO_DIR
 source $SCRIPT $SCRIPT_ARGS
 EOL
-)"</command>
+)&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>console.log,choreonoid.csv,system.csv,core,*.log,changes.txt,uploads.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv,irex-balance-beam-auto.txt,irex-balance-beam-auto.png,irex-balance-beam-auto.ogv</artifacts>
+      <artifacts>*.log,*.txt</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -529,13 +529,6 @@ EOL
           <deleteOutputFiles>true</deleteOutputFiles>
           <stopProcessingIfError>true</stopProcessingIfError>
         </GoogleTestType>
-        <JUnitType>
-          <pattern>**/jenkinshrg.xml,**/testbed-terrain.xml,**/drc-valves.xml,**/drc-wall-testbed.xml,**/irex-balance-beam-auto.xml</pattern>
-          <skipNoTestFiles>true</skipNoTestFiles>
-          <failIfNotNew>false</failIfNotNew>
-          <deleteOutputFiles>true</deleteOutputFiles>
-          <stopProcessingIfError>true</stopProcessingIfError>
-        </JUnitType>
       </types>
       <thresholds>
         <org.jenkinsci.plugins.xunit.threshold.FailedThreshold>
@@ -609,7 +602,7 @@ EOL
       </plots>
     </hudson.plugins.plot.PlotPublisher>
     <hudson.tasks.BuildTrigger>
-      <childProjects>report</childProjects>
+      <childProjects>drcutil-upload</childProjects>
       <threshold>
         <name>FAILURE</name>
         <ordinal>2</ordinal>
@@ -681,8 +674,8 @@ cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>2</daysToKeep>
-        <numToKeep>-1</numToKeep>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>100</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
@@ -713,7 +706,7 @@ source $SCRIPT $SCRIPT_ARGS</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>console.log,choreonoid.csv,system.csv,core,*.log,changes.txt,uploads.txt,jenkinshrg.txt,jenkinshrg.ogv,jenkinshrg.png,testbed-terrain.txt,testbed-terrain.png,testbed-terrain.ogv,drc-valves.txt,drc-valves.png,drc-valves.ogv,drc-wall-testbed.txt,drc-wall-testbed.png,drc-wall-testbed.ogv,irex-balance-beam-auto.txt,irex-balance-beam-auto.png,irex-balance-beam-auto.ogv</artifacts>
+      <artifacts>*.log,*.txt,*.png,*.ogv,*.csv</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
@@ -847,7 +840,7 @@ source $SCRIPT $SCRIPT_ARGS</command>
           <stopProcessingIfError>true</stopProcessingIfError>
         </GoogleTestType>
         <JUnitType>
-          <pattern>**/jenkinshrg.xml,**/testbed-terrain.xml,**/drc-valves.xml,**/drc-wall-testbed.xml,**/irex-balance-beam-auto.xml</pattern>
+          <pattern>*.xml</pattern>
           <skipNoTestFiles>true</skipNoTestFiles>
           <failIfNotNew>false</failIfNotNew>
           <deleteOutputFiles>true</deleteOutputFiles>
@@ -926,7 +919,7 @@ source $SCRIPT $SCRIPT_ARGS</command>
       </plots>
     </hudson.plugins.plot.PlotPublisher>
     <hudson.tasks.BuildTrigger>
-      <childProjects>report</childProjects>
+      <childProjects>drcutil-upload</childProjects>
       <threshold>
         <name>FAILURE</name>
         <ordinal>2</ordinal>
@@ -998,8 +991,8 @@ cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
   <properties>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>2</daysToKeep>
-        <numToKeep>-1</numToKeep>
+        <daysToKeep>-1</daysToKeep>
+        <numToKeep>100</numToKeep>
         <artifactDaysToKeep>-1</artifactDaysToKeep>
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
