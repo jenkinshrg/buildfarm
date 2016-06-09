@@ -13,6 +13,7 @@ EOF
 
 sudo apt-get -y install debootstrap
 sudo apt-get -y install debian-archive-keyring
+sudo apt-get -y install nfs-common
 
 wget -qO- https://get.docker.com/ | sh
 sudo usermod -aG docker $USER
