@@ -1,9 +1,15 @@
 #!/bin/bash
 
+export UBUNTU_VER="$(lsb_release -rs)"
+
 sudo apt-get update
 
 sudo apt-get -y install daemon
-sudo apt-get -y install openjdk-7-jdk
+if [ "$UBUNTU_VER" = "16.04" ]; then
+    sudo apt-get -y install openjdk-8-jdk
+else
+    sudo apt-get -y install openjdk-7-jdk
+fi
 sudo apt-get -y install openssh-server
 
 sudo apt-get -y install unattended-upgrades
