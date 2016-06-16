@@ -4,6 +4,7 @@ sudo apt-get update
 
 sudo apt-get -y install daemon
 sudo apt-get -y install openjdk-7-jdk
+sudo apt-get -y install openssh-server
 
 sudo apt-get -y install unattended-upgrades
 cat << EOF | sudo tee /etc/apt/apt.conf.d/20auto-upgrades
