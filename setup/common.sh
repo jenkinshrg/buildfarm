@@ -10,7 +10,7 @@ if [ "$UBUNTU_VER" = "16.04" ]; then
 else
     sudo apt-get -y install openjdk-7-jdk
 fi
-sudo apt-get -y install openssh-server
+sudo apt-get -y install openssh-server ntp
 
 sudo apt-get -y install unattended-upgrades
 cat << EOF | sudo tee /etc/apt/apt.conf.d/20auto-upgrades
