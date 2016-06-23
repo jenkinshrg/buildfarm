@@ -706,7 +706,7 @@ source $SCRIPT $SCRIPT_ARGS</command>
   </builders>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>*.log,*.txt,*.png,*.ogv,*.csv,*.tau,*.q</artifacts>
+      <artifacts>*.log,*.txt,*.png,*.ogv,*.csv,*.tau,*.q,*.qRef</artifacts>
       <allowEmptyArchive>true</allowEmptyArchive>
       <onlyIfSuccessful>false</onlyIfSuccessful>
       <fingerprint>false</fingerprint>
