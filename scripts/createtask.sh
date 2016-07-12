@@ -11,4 +11,4 @@ waitsec=$8
 targetname=$9
 targetport=${10}
 
-./createjob.sh $jobname periodic !master&&!slave1 none none none .jenkins.sh task $robotname $taskname $autox $autoy $okx $oky $waitsec $targetname $targetport
+./createjob.sh $jobname periodic slave2 none none none .jenkins.sh task $robotname $taskname $autox $autoy $okx $oky $waitsec $targetname $targetport
