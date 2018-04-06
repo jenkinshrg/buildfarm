@@ -367,6 +367,7 @@ rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 
 sudo docker run --rm -t -v \$HOME:\$HOME -v \$WORKSPACE:\$WORKSPACE base/$OS:$DISTRO /bin/bash -c &quot;\$(cat &lt;&lt; EOL
+source \$HOME/.jenkinshrg/env.sh
 set -xe
 export WORKSPACE=\$WORKSPACE
 export JOB_NAME=\$JOB_NAME
@@ -387,7 +388,6 @@ if [ -d \$HOME/.jenkinshrg ]; then
   cp -a \$HOME/.jenkinshrg /root
   chown -R root.root /root/.jenkinshrg
 fi
-source /root/.jenkinshrg/env.sh
 cd \$WORKSPACE/$REPO_DIR
 source $SCRIPT $SCRIPT_ARGS
 EOL
@@ -696,11 +696,11 @@ cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
   <builders>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
+source \$HOME/.jenkinshrg/env.sh
 set -xe
 rm -fr $REPO_DIR
 git clone --branch $BRANCH --single-branch $REPO_URL $REPO_DIR
 cd $REPO_DIR
-source \$HOME/.jenkinshrg/env.sh
 source $SCRIPT $SCRIPT_ARGS</command>
     </hudson.tasks.Shell>
   </builders>
