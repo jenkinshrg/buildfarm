@@ -41,8 +41,6 @@ fi
 
 wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
 
-java -jar jenkins-cli.jar -s $JENKINS_URL login --username jenkinshrg
-
 if [ "$TEMPLATE" = "scm" ]; then
 cat << EOF | java -jar jenkins-cli.jar -s $JENKINS_URL create-job $NAME
 <?xml version='1.0' encoding='UTF-8'?>
