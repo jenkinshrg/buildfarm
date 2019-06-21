@@ -13,8 +13,6 @@ REMOTE_FS=${REMOTE_FS:-$HOME}
 
 wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
 
-java -jar jenkins-cli.jar -s $JENKINS_URL login --username jenkinshrg
-
 cat << EOL | java -jar jenkins-cli.jar -s $JENKINS_URL create-node $NAME
 <?xml version="1.0" encoding="UTF-8"?>
 <slave>
