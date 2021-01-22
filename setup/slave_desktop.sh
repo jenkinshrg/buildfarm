@@ -6,7 +6,7 @@ if [ $# -lt 1 ] ;  then
 fi
 
 NAME=$1
-URL=${2:-http://jenkinshrg.a01.aist.go.jp}
+URL=${2:-http://jenkinshrg.s.aist.go.jp}
 
 wget -q -O $HOME/slave.jar $URL/jnlpJars/slave.jar
 
